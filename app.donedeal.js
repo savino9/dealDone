@@ -36,56 +36,56 @@ app.use(express.static('./public'));
 
 //MODELS DEFINITION ------------------------------------------------------------
 
-// const Bar = sequelize.define('users',{
-//     username: {
-//         type: Sequelize.STRING,
-//         unique: true
-//     },
-//     firstname: {
-//         type: Sequelize.STRING,
-//         unique: false
-//     },
-//     lastname: {
-//         type: Sequelize.STRING,
-//         unique: false
-//     },
-//     email: {
-//         type: Sequelize.STRING,
-//         unique: true
-//     },
-//     password: {
-//         type: Sequelize.STRING,
-//         unique: false,
-//     },
-//   },   {
-//       timestamps: false
-//     })
-//
-//     const Post = sequelize.define('posts', {
-//       username: {
-//           type: Sequelize.STRING,
-//           allowNull: false
-//       },
-//         title: {
-//             type: Sequelize.STRING,
-//             allowNull: false
-//         },
-//         body: {
-//             type: Sequelize.STRING,
-//             allowNull: false
-//         },
-//     },  {
-//        timestamps: false
-//      })
-//
-//     const Comments = sequelize.define('comments', {
-//         body: {
-//             type: Sequelize.STRING,
-//             allowNull: false
-//         },
-//     },   {
-//         timestamps: false
-//       })
+const barandrestaurant = sequelize.define('barandrestaurant',{
+    username: {
+        type: Sequelize.STRING,
+        unique: true
+    },
+    firstname: {
+        type: Sequelize.STRING,
+        unique: false
+    },
+    lastname: {
+        type: Sequelize.STRING,
+        unique: false
+    },
+    email: {
+        type: Sequelize.STRING,
+        unique: true
+    },
+    password: {
+        type: Sequelize.STRING,
+        unique: false,
+    },
+  },   {
+      timestamps: false
+    })
+
+    const Post = sequelize.define('posts', {
+      username: {
+          type: Sequelize.STRING,
+          allowNull: false
+      },
+        title: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        body: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+    },  {
+       timestamps: false
+     })
+
+    const Comments = sequelize.define('comments', {
+        body: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+    },   {
+        timestamps: false
+      })
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
     // User.hasMany(Post, { foreignKey: { allowNull: false } });
@@ -99,6 +99,9 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => {
     res.render('home')
 })
+
+
+
 
 // 02: DRINKS PAGE -------------------------------------------------------------
 
@@ -122,6 +125,12 @@ app.get('/food', (req, res) => {
 
 app.get('/contact', (req, res) => {
   res.render('contact')
+})
+
+// 06: BUSINESS MODEL ----------------------------------------------------------
+
+app.get('/businessmodel', (req, res) => {
+    res.render('businessmodel')
 })
 
 

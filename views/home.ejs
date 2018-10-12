@@ -2,50 +2,134 @@
 
 <head>
 
-  <title>Home Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- <link rel="stylesheet" href="css/try.css"> -->
+      <!-- Bootstrap CSS -->
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="src/css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" id="bootstrap-css">
+<link rel="stylesheet" href="/src/css/style.css">
+<link rel="stylesheet" href="/src/css/style2.css">
+<link rel="stylesheet" href="css/try.js">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-</head>
+<title>Done Deal</title>
 
+  </head>
+<!--
+  NAVBARRR!!! -->
+
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
+  <nav class="navbar navbar-default navbar-inverse" style="background-color: #F8F8F8;"
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
 
-    <%- include partials/navbar.ejs %>
+    <body>
 
-  <h2>Website Test</h2>
+  <%- include partials/navbar.ejs %>
 
 
-  <form action="/matched" method="post">
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+  <!-- Overlay -->
+  <div class="overlay"></div>
 
-<div class="form-group">
-  <select>
-    <option value="18:00 - 19:00">18:00 - 19:00</option>
-    <option value="19:00 - 20:00">19:00 - 20:00</option>
-    <option value="20:00 - 21:00">20:00 - 21:00</option>
-    <option value="21:00 - 22:00">21:00 - 22:00</option>
-  </select>
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="slide-1"></div>
+      <div class="hero">
+        <hgroup>
+            <h1>We are Done Deal</h1>
+            <h3>We save you money!</h3>
+        </hgroup>
+        <button class="btn btn-hero btn-lg" role="button">See all features</button>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-2"></div>
+      <div class="hero">
+        <hgroup>
+            <h1>Drinks!</h1>
+            <h3>Get the drinks discounts here!</h3>
+        </hgroup>
+        <button class="btn btn-hero btn-lg" role="button">See all features</button>
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-3"></div>
+      <div class="hero">
+        <hgroup>
+            <h1>Let's go out! </h1>
+            <h3>Catch up with Friends!</h3>
+        </hgroup>
+        <button class="btn btn-hero btn-lg" role="button">See all features</button>
+      </div>
+    </div>
   </div>
-
-  <p><a class="nav-link" href="/drinks">Drink Deals</a></p>
-
-  <div class="slidecontainer">
-  <input type="range" min="1" max="11" value="6" class="slider" id="myRange">
-  <p>Value: <span id="demo"></span></p>
-
-  <button type="button" onclick="myFunction()">Try it</button>
 </div>
 
+<div class="container">
+    <h2></h2>
+	<div class="row">
+		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+						<div class="our-services-wrapper mb-60">
+							<div class="services-inner">
+								<div class="our-services-img">
 
+								<img src="http://getdrawings.com/img/silhouette-beer-10.png" width="65px" height="80px" alt="">
+								</div>
+								<div class="our-services-text">
+									<h4>Drinking Deals</h4>
+									<p><a class="nav-link" href="/drinks"> Find out the best drinking deals in Amsterdam!</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+						<div class="our-services-wrapper mb-60">
+							<div class="services-inner">
+								<div class="our-services-img">
+								<img src="https://ubisafe.org/images/burger-transparent-silhouette-1.png" width="65px" alt="">
+								</div>
+								<div class="our-services-text">
+									<h4>Food Deals</h4>
+									<p><a class="nav-link" href="/food"> Here you find the best food deals around town!</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+						<div class="our-services-wrapper mb-60">
+							<div class="services-inner">
+								<div class="our-services-img">
+								<img src="https://png.pngtree.com/svg/20151105/about_us_icon_87514.png" width="68px" alt="">
+								</div>
+								<div class="our-services-text">
+									<h4>About us</h4>
+									<p><a class="nav-link" href="/aboutus"> Let us introduce ourselves to you! We like to get in touch<a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+	</div>
+</div>
 
-</form>
+  <%- include partials/footer.ejs %>
 
-
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-</body>
-
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
 </html>
