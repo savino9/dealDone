@@ -36,51 +36,36 @@ app.use(express.static('./public'));
 
 //MODELS DEFINITION ------------------------------------------------------------
 
-const barandrestaurant = sequelize.define('barandrestaurant',{
-    username: {
+const business = sequelize.define('business',{
+    name: {
         type: Sequelize.STRING,
         unique: true
     },
-    firstname: {
+    address: {
         type: Sequelize.STRING,
         unique: false
-    },
-    lastname: {
-        type: Sequelize.STRING,
-        unique: false
-    },
-    email: {
-        type: Sequelize.STRING,
-        unique: true
-    },
-    password: {
-        type: Sequelize.STRING,
-        unique: false,
     },
   },   {
       timestamps: false
     })
 
-    const Post = sequelize.define('posts', {
-      username: {
+
+    const time = sequelize.define('time',{
+      time: {
           type: Sequelize.STRING,
           allowNull: false
       },
-        title: {
+        day: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        body: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-    },  {
-       timestamps: false
-     })
+      },  {
+          timestamps: false
+        })
 
-    const Comments = sequelize.define('comments', {
+    const offer = sequelize.define('offer', {
         body: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
             allowNull: false
         },
     },   {
@@ -88,10 +73,11 @@ const barandrestaurant = sequelize.define('barandrestaurant',{
       })
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
-    // User.hasMany(Post, { foreignKey: { allowNull: false } });
-    // Post.belongsTo(User, { foreignKey: { allowNull: false } });
-    // Comments.belongsTo(Post, { foreignKey: { allowNull: false } });
-    // Comments.belongsTo(User, { foreignKey: { allowNull: false } });
+    // Business.hasMany(Offer, { foreignKey: { allowNull: false } });
+    // Time.hasMany(Offer, { foreignKey: { allowNull: false } });
+
+    // Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
+    // Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
 
 
 // 01: HOME PAGE----------------------------------------------------------------
@@ -99,9 +85,6 @@ const barandrestaurant = sequelize.define('barandrestaurant',{
 app.get('/', (req, res) => {
     res.render('home')
 })
-
-
-
 
 // 02: DRINKS PAGE -------------------------------------------------------------
 
@@ -134,7 +117,7 @@ app.get('/businessmodel', (req, res) => {
 })
 
 
-
+///POSTGRES//////////////
 
 // app.get('/show_all_messages', function(req, res){
 //
@@ -148,6 +131,16 @@ app.get('/businessmodel', (req, res) => {
 //     });
 // });
 //
+
+
+
+
+
+
+
+
+
+////////////////////SEQUELIZE/////////////////////////
 //
 // app.post('/', (req, res) => {
 //

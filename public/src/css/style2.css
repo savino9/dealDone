@@ -219,15 +219,18 @@ Fade content bs-carousel with hero headers
 
 .mb-60 {
     margin-bottom: 60px;
+
+
 }
 .services-inner {
     border: 2px solid #000000;
     margin-left: 35px;
+        background-color: white;
     transition: .3s;
 }
 .our-services-img {
     float: left;
-    margin-left: 10px;
+    margin-left: 5px;
     margin-right: 1px;
     margin-top: 15px;
 }
