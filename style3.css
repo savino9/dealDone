@@ -1,0 +1,50 @@
+form {width: 40%;
+      margin-right: 30%;
+      margin-left: 30%;
+      background-color:  rgba(0, 0, 0, 0.6);
+      color: orange;
+      text-align: center;
+      font-family: Helvetica;
+      opacity: 1;
+  }
+
+  .form .form-d, .form .form-h {
+      flex-basis: 50%;
+  }
+
+div.mainform {width:100%;
+              border:1px solid #000}
+
+
+
+.btn {
+    color: white;
+}
+
+.button_search {
+  color: orange;
+}
+
+
+.bgdrinks {
+    background-image: url(https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-);
+    height: 1000px;
+background-position: center; /* Center the image */
+background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover;
+        z-index: -1;
+}
+
+.card-deck {
+  color: orange;
+  width: 100%
+  font-family: Helvetica;
+}
+
+.card-title {
+  color: orange;
+}
+
+.card-text {
+  color: orange;
+}
