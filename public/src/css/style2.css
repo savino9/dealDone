@@ -149,8 +149,8 @@ Fade content bs-carousel with hero headers
 .btn.btn-hero:hover,
 .btn.btn-hero:focus {
     color: #f5f5f5;
-    background-color: #1abc9c;
-    border-color: #1abc9c;
+    background-color: orange;
+    border-color: white;
     outline: none;
     margin: 20px auto;
 }
@@ -219,6 +219,7 @@ Fade content bs-carousel with hero headers
 
 .mb-60 {
     margin-bottom: 60px;
+display: flex;
 
 
 }
@@ -235,11 +236,14 @@ Fade content bs-carousel with hero headers
     margin-top: 15px;
 }
 .our-services-text {
+  text-align: center;
     padding-right: 10px;
 }
 .our-services-text {
+  text-family: Helvetica;
+  text-align: center;
     overflow: hidden;
-    padding: 28px 0 25px;
+    padding: 28px 0 28px;
 }
 .our-services-text h4 {
     color: #222222;
@@ -333,7 +337,7 @@ a:hover{
 }
 
 .logo{
-   color:#FFF;
+   color:orange;
    font-size:30px;
    font-weight:600;
 }
