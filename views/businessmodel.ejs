@@ -1,28 +1,20 @@
 <html>
 
 <head>
-
-  <title>Business Model</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" id="bootstrap-css">
-  <link rel="stylesheet" href="/src/css/style.css">
-  <link rel="stylesheet" href="/src/css/style2.css">
-  <link rel="stylesheet" href="css/try.js">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-</head>
+  <%- include partials/head.ejs %>
+</head><!-- /head -->
 
 <body>
 
-    <%- include partials/navbar.ejs %>
+  <header>
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
 
       <h1>Would you like to promote your bar or restaurant on our site?</h1>
 
   <div class="bgdrinks"></div>
-  
 
           <div class="container">
-
               <h2></h2>
           	<div class="row">
           		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
@@ -78,11 +70,9 @@
                      <a href="/signup" class="btn btn-default btn-lg btn-block" role="button">Want to sign up?</a>
           </div>
 
-  <%- include partials/footer.ejs %>
+          <footer>
+            <%- include partials/footer.ejs %>
+          </footer>
+          </body>
 
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+          </html>

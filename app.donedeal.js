@@ -3,31 +3,43 @@
 const Sequelize = require('sequelize');
 const express = require('express');
 const ejs = require('ejs');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+
 const app = express();
 
-const bodyParser = require('body-parser');
+// require('dotenv').config();
 
 // CONNECT WITH TEMPLATE ENGINE FOLDER -----------------------------------------
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-// CONFIG DEPENDENCIES ---------------------------------------------------------
+// DATABASE ---------------------------------------------------------
 
-const sequelize = new Sequelize('donedeal', 'postgres', 'p0stgr3SQL', {
+const sequelize = new Sequelize('happyhour', 'postgres', 'p0stgr3SQL', {
     host: 'localhost',
     dialect: 'postgres'
-})
+});
 
-// CONNECT WITH PUBLIC FOLDER --------------------------------------------------
 
-app.use(express.static('./public'));
+// SET UP SESSION --------------------------------------------------------------
+
+app.use(session({
+  store: new SequelizeStore({
+    db: sequelize,
+    checkExpirationInterval: 15 * 60 * 1000,
+    expiration: 24 * 60 * 60 * 1000
+  }),
+  secret: "any string",
+  saveUninitialized: true,
+  resave: false
+}))
 
 // SET UP BODY PARSER ----------------------------------------------------------
 
 app.use(bodyParser.urlencoded({extended: true}));
-
-// ROUTING----------------------------------------------------------------------
 
 // CONNECT WITH PUBLIC FOLDER --------------------------------------------------
 
@@ -36,55 +48,113 @@ app.use(express.static('./public'));
 
 //MODELS DEFINITION ------------------------------------------------------------
 
-const business = sequelize.define('business',{
-    name: {
-        type: Sequelize.STRING,
-        unique: true
-    },
-    address: {
-        type: Sequelize.STRING,
-        unique: false
-    },
-  },   {
-      timestamps: false
-    })
+const Business = sequelize.define('businesses',{
+  username: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  name: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  address: {
+    type: Sequelize.STRING,
+    unique: false
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    unique: false
+  },
+},   {
+     timestamps: false
+   })
 
+const Offer = sequelize.define('offers', {
+  body: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  }
+}, {
+    timestamps: false
+  })
 
-    const time = sequelize.define('time',{
-      time: {
-          type: Sequelize.STRING,
-          allowNull: false
-      },
-        day: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-      },  {
-          timestamps: false
-        })
-
-    const offer = sequelize.define('offer', {
-        body: {
-            type: Sequelize.TEXT,
-            allowNull: false
-        },
-    },   {
-        timestamps: false
-      })
+const Time = sequelize.define('times', {
+  time: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  day: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+}, {
+    timestamps: false
+  })
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
-    // Business.hasMany(Offer, { foreignKey: { allowNull: false } });
-    // Time.hasMany(Offer, { foreignKey: { allowNull: false } });
-
-    // Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
-    // Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
-
+  Business.hasMany(Offer, { foreignKey: { allowNull: false } });
+  Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
 // 01: HOME PAGE----------------------------------------------------------------
 
 app.get('/', (req, res) => {
     res.render('home')
 })
+
+app.get('/login', (req, res) => {
+  var business = req.session.business;
+    res.render('login')
+})
+
+// 02: CHECKING FOR MATCHING USER INPUT DATA------------------------------------
+
+app.post('/login', function (req, res) {
+
+    let username = req.body.username;
+    let password = req.body.password;
+
+    if(username.length === 0) {
+      res.redirect('/?message=' + encodeURIComponent("Please fill in your correct username."));
+      return;
+    }
+
+    if(password.length === 0) {
+      res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
+      return;
+    }
+
+    Business.findOne({
+  		where: {
+  			username: username
+  		}
+  	}).then(function(business){
+
+  			if(business!== null && password === business.password){
+          console.log("business info" + JSON.stringify(business.dataValues));
+          req.session.business = business;
+  				res.redirect('/profile');
+  			} else {
+  				res.redirect('/?message=' + encodeURIComponent('Invalid email or password.'));
+  			}
+  	});
+  });
+
+//  LOG OUT ---------------------------------------------------------------
+
+app.get('/logout', (req,res)=>{
+  req.session.destroy(function(error) {
+    if(error) {
+      throw error;
+    }
+    res.redirect('/?message=' + encodeURIComponent("Successfully logged out."));
+  })
+})
+
+// LOGIN
 
 // 02: DRINKS PAGE -------------------------------------------------------------
 
@@ -116,84 +186,70 @@ app.get('/businessmodel', (req, res) => {
     res.render('businessmodel')
 })
 
+// 07: SIGN UP----------------------------------------------------------------
 
-///POSTGRES//////////////
+app.get('/signup', (req, res) => {
+  res.render('signup');
+})
 
-// app.get('/show_all_messages', function(req, res){
-//
-//     client.query('SELECT * FROM messages', function(err, result) {
-//
-// 			console.log(err? err.stack : result.rows)
-//
-//   	var data = result.rows;
-//     res.render('show_all_messages', {data: data});
-//     //     }
-//     });
-// });
-//
+app.post('/signup', (req,res) => {
+
+  let inputusername = req.body.username
+  let inputname = req.body.name
+  let inputaddress = req.body.address
+  let inputemail = req.body.email
+  let inputpassword = req.body.password
+  let inputconfirmpassword = req.body.confirmpassword
+
+  if (inputpassword !== inputconfirmpassword) {
+    res.send('Your password does not match');
+  } else {
+  Business.create({
+    username: inputusername,
+    name: inputname,
+    address: inputaddress,
+    email: inputemail,
+    password: inputpassword,
+  })
+
+  .then((business) => {
+        req.session.business = business;
+        res.redirect('/profile');
+      });
+    }
+})
+
+// 08: BUSINESS PROFILE ---------------------------------------------------------------
+
+app.get('/profile', (req, res)=> {
+
+  const business = req.session.business;
+  if(business != null){
+  res.render('profile', {business: business})             // message: message
+}else{
+    res.redirect('/')
+}
+})
+
+// 09: BUSINESS CREATE OFFER ---------------------------------------------------
 
 
-
-
-
-
-
-
-
-////////////////////SEQUELIZE/////////////////////////
-//
-// app.post('/', (req, res) => {
-//
-//   console.log(req.body.firstname);
-//   client.query('SELECT * FROM bars')
-//
-//   fs.readFile('resources/users.json', (err, data) => {
-//     if (err) {
-//       throw err;
-//     }
-//     let myUsers = JSON.parse(data);
-//     var suggest = {};
-//
-//     for (let i = 0; i < myUsers.length; i++) {
-//       var compfirst = myUsers[i].firstname.toLowerCase();
-//       var complast = myUsers[i].lastname.toLowerCase();
-//       if (compfirst.includes(req.body.firstname) || complast.includes(req.body.lastname)) {
-//         suggest[i] = compfirst + " " + complast;
-//       }
-//     }
-//     res.send(suggest)
-//   })
-// })
-//
-// app.post('/matched', (req, res) => {
-// let matchedUser = null;
-// fs.readFile('resources/users.json', (err, data) => {
-//   if (err) {
-//     throw err;
-//   }
-//   let myUsers = JSON.parse(data);
-//
-//   for (let i = 0; i < myUsers.length; i++) {
-//     if (req.body.firstname.toLowerCase() == myUsers[i].firstname.toLowerCase() || req.body.lastname.toLowerCase() == myUsers[i].lastname.toLowerCase()) {
-//       matchedUser = myUsers[i];
-//       res.render('matched', {
-//         match: matchedUser
-//       });
-//     }
-//   }
-//   if (matchedUser === null) {
-//     res.render('no_match');
-//   }
-// });
-// });
 
 // ENABLE SEQUELIZE.SYNC ------------------------------------------------------
 
 sequelize.sync({force: false})
 
-
 // CONFIGURE PORT - ------------------------------------------------------------
 
-  app.listen(3017, () => {
-      console.log('App is running on port 3017');
-  })
+ app.listen(3018, () => {
+     console.log('App is running on port 3018');
+ })
+
+// START SERVER AND SEQUELIZE ------------------------------------------------------
+
+// sequelize.sync({force: false})
+// .then(() => {
+//   const server = app.listen(3000, () => {
+//     console.log('App is running on port 3000');
+//   });
+// });

@@ -1,143 +1,97 @@
 <html>
 
 <head>
+  <%- include partials/head.ejs %>
+</head><!-- /head -->
 
-  <title>Drinks Page</title>
+<body>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" id="bootstrap-css">
-  <link rel="stylesheet" href="/src/css/style.css">
-  <link rel="stylesheet" href="/src/css/style2.css">
-    <link rel="stylesheet" href="/src/css/style3.css">
-    <link rel="stylesheet" href="/src/css/styledayandtime.css">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <header>
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
 
-        <div class="bgdrinks">
+  <div class="container">
+    <h2></h2>
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+        <div class="our-services-wrapper mb-60">
+          <div class="services-inner">
+            <div class="our-services-img">
 
-  <%- include partials/navbar.ejs %>
-
-  <h1>How it works <br>in three easy steps</h1>
-
-  <div class="card-deck">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Select What You Want To Do</h5>
-        <p class="card-text"> Do you want to eat? Or drink?
-  Or both?
-  How do you find the best offers?
-  With Done Deal ©
-        </p>
+            </div>
+            <div class="our-services-text">
+              <h4>Select what you want to do</h4>
+              <p>Do you want to eat? Or drink?</p><br>
+              <p>Or both?</p><br>
+              <p>How do you find the best offers?</p><br>
+              <p>With Done Deal ©</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted"></small>
+
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+        <div class="our-services-wrapper mb-60">
+          <div class="services-inner">
+            <div class="our-services-img">
+
+            </div>
+            <div class="our-services-text">
+              <h4>What day and time?</h4><br>
+              <p>Select a block of time (for example 19:00 - 20:00)</p><br>
+              <p>See all the special offers, combination deals and happy hours at this time</p><br>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+          <div class="our-services-wrapper mb-60">
+            <div class="services-inner">
+              <div class="our-services-img">
+
+              </div>
+              <div class="our-services-text">
+                <h4>Make your decision!</h4><br>
+                <p>That's it!</p><br>
+                <p>Enjoy yourself!</p><br>
+                <p>(Enjoy alcohol responsibly)</p><br>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">What Day and Time</h5>
-        <p class="card-text">Select a block of time (for example 19:00 - 20:00)
 
-  See all the special offers, combination deals and happy hours at this time</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted"></small>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Make Your Decision</h5>
-        <p class="card-text">
-          That's it!
-
-    Enjoy yourself!
-
-    (Enjoy alcohol responsibly)</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted"></small>
-      </div>
-    </div>
-  </div>
-
-  <div id="form-dayandtime">
-      <form>
     <h2>When would you like to go out?</h2>
 
+    <div class="bgdrinks">
 
-  <div class="form-d">
-    <label class="form-label" for="date">
-            <span class="form-select">
-              <select name="date" id="date">
-                <option value="noDate">Day</option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-              </select>
-            </span>
-          </label>
-  </div>
-      <div class="btn-group">
-  <div class="form-h">
-    <label class="form-label" for="hour">
-            <span class="form-select">
-              <select name="time" id="hour">
-                <option value="">Time</option>
-                  <option value="00:00-01:00">00:00-01:00</option>
-                  <option value="01:00-02:00">01:00-02:00</option>
-                  <option value="02:00-03:00">02:00-03:00</option>
-                  <option value="03:00-04:00">03:00-04:00</option>
-                  <option value="04:00-05:00">04:00-05:00</option>
-                  <option value="05:00-06:00">05:00-06:00</option>
-                  <option value="06:00-07:00">06:00-07:00</option>
-                  <option value="07:00-08:00">07:00-08:00</option>
-                  <option value="08:00-09:00">08:00-09:00</option>
-                  <option value="09:00-10:00">09:00-10:00</option>
-                  <option value="10:00-11:00">10:00-11:00</option>
-                  <option value="11:00-12:00">11:00-12:00</option>
-                  <option value="12:00-13:00">12:00-13:00</option>
-                  <option value="13:00-14:00">13:00-14:00</option>
-                  <option value="14:00-15:00">14:00-15:00</option>
-                  <option value="15:00-16:00">15:00-16:00</option>
-                  <option value="16:00-17:00">16:00-17:00</option>
-                  <option value="17:00-18:00">17:00-18:00</option>
-                  <option value="18:00-19:00">18:00-19:00</option>
-                  <option value="19:00-20:00">19:00-20:00</option>
-                  <option value="20:00-21:00">20:00-21:00</option>
-                  <option value="21:00-22:00">21:00-22:00</option>
-                  <option value="22:00-23:00">22:00-23:00</option>
-                  <option value="23:00-00:00">23:00-00:00</option>
-              </select>
-            </span>
-          </label>
-  </div>
+      <div class="form-group" style="opacity:1;">
+        <select>
+      <option value="Select a time">Select a time</option>
+      <option value="18:00 - 19:00">18:00 - 19:00 Monday</option>
+      <option value="19:00 - 20:00">19:00 - 20:00 Monday</option>
+      <option value="20:00 - 21:00">20:00 - 21:00 Monday</option>
+      <option value="21:00 - 22:00">21:00 - 22:00 Monday</option>
+      <option value="18:00 - 19:00">18:00 - 19:00 Tuesday</option>
+      <option value="19:00 - 20:00">19:00 - 20:00 Tuesday</option>
+      <option value="20:00 - 21:00">20:00 - 21:00 Tuesday</option>
+      <option value="21:00 - 22:00">21:00 - 22:00 Tuesday</option>
+    </select>
+        <div class="form-group">
+          <input type="submit" value="Submit" style="opacity:1">
+    </div>
+        </div>
+
       </div>
 
-<p><a href="/howitworks"><button class="btn btn-hero btn-lg" role="button">Submit</button></a><p>
+    </div>
 
-  </div>
+    <footer>
+      <%- include partials/footer.ejs %>
+    </footer>
+    </body>
 
-</form>
-</div>
-
-  <br>
-  <br>
-
-</div>
-
-
-
-
-<%- include partials/footer.ejs %>
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-</body>
-
-</html>
+    </html>

@@ -1,39 +1,43 @@
 <html>
 
 <head>
+  <%- include partials/head.ejs %>
+</head><!-- /head -->
 
-  <title>Drinks Page</title>
+<body>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" id="bootstrap-css">
-  <link rel="stylesheet" href="/src/css/style.css">
-  <link rel="stylesheet" href="/src/css/style2.css">
-    <link rel="stylesheet" href="/src/css/style3.css">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <header>
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
 
-  <body>
+<h1> Login </h1>
 
-  <%- include partials/navbar.ejs %>
-
-<form>
-  <fieldset>
-    <legend>Legend</legend>
+  <form id="login" action="/login" method="POST">
+    <label for="Sign In Text"><h6>Sign in to your account</h6></label>
+    <br>
     <div class="form-group">
-      <label for="exampleInputEmail">Email address</label>
-      <input type="text" class="form-control" id="exampleInputEmail" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </fieldset>
-</form>
+      <label for="exampleInputUsername">Username:</label><br>
+      <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter Your Username">
+      </div>
 
-<%- include partials/footer.ejs %>
+      <div class="form-group">
+        <label for="exampleInputPassword">Password:</label><br>
+        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter Your Password">
+      </div>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <div class="form-group">
+          <input type="submit" value="Submit">
+      </div>
+  </form>
 
-</body>
+  <h6>Don't have an account yet?</h6>
+  <h6><a href="/signup" target="_blank">Signup</a></h6><br>
+  <h6><a href="/logout" target="_blank">Logout</a></h6>
 
-</html>
+  <footer>
+    <%- include partials/footer.ejs %>
+  </footer>
+
+  </body>
+
+  </html>
