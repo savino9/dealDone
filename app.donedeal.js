@@ -99,18 +99,18 @@ const Time = sequelize.define('times', {
   Business.hasMany(Offer, { foreignKey: { allowNull: false } });
   Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
-// 01: HOME PAGE----------------------------------------------------------------
+// HOME PAGE -------------------------------------------------------------------
 
 app.get('/', (req, res) => {
     res.render('home')
 })
 
+// LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
+
 app.get('/login', (req, res) => {
   var business = req.session.business;
     res.render('login')
 })
-
-// 02: CHECKING FOR MATCHING USER INPUT DATA------------------------------------
 
 app.post('/login', function (req, res) {
 
@@ -143,7 +143,7 @@ app.post('/login', function (req, res) {
   	});
   });
 
-//  LOG OUT ---------------------------------------------------------------
+// LOG OUT ---------------------------------------------------------------------
 
 app.get('/logout', (req,res)=>{
   req.session.destroy(function(error) {
@@ -154,39 +154,7 @@ app.get('/logout', (req,res)=>{
   })
 })
 
-// LOGIN
-
-// 02: DRINKS PAGE -------------------------------------------------------------
-
-app.get('/drinks', (req, res) => {
-  res.render('drinks')
-})
-
-// 03: FOOD PAGE ---------------------------------------------------------------
-
-app.get('/food', (req, res) => {
-  res.render('food')
-})
-
-// 04: ABOUT US ----------------------------------------------------------------
-
- app.get('/aboutus', (req, res) => {
-  res.render('aboutus')
-})
-
-// 05: CONTACT -----------------------------------------------------------------
-
-app.get('/contact', (req, res) => {
-  res.render('contact')
-})
-
-// 06: BUSINESS MODEL ----------------------------------------------------------
-
-app.get('/businessmodel', (req, res) => {
-    res.render('businessmodel')
-})
-
-// 07: SIGN UP----------------------------------------------------------------
+// SIGN UP ---------------------------------------------------------------------
 
 app.get('/signup', (req, res) => {
   res.render('signup');
@@ -219,7 +187,7 @@ app.post('/signup', (req,res) => {
     }
 })
 
-// 08: BUSINESS PROFILE ---------------------------------------------------------------
+// BUSINESS PROFILE ------------------------------------------------------------
 
 app.get('/profile', (req, res)=> {
 
@@ -231,21 +199,53 @@ app.get('/profile', (req, res)=> {
 }
 })
 
-// 09: BUSINESS CREATE OFFER ---------------------------------------------------
+// BUSINESS CREATE OFFER -------------------------------------------------------
 
+// BUSINESS UPDATE OFFERS ------------------------------------------------------
 
+// BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
 
-// ENABLE SEQUELIZE.SYNC ------------------------------------------------------
+// DRINKS SEARCH PAGE ----------------------------------------------------------
+
+app.get('/drinks', (req, res) => {
+  res.render('drinks')
+})
+
+// FOOD SEARCH PAGE ------------------------------------------------------------
+
+app.get('/food', (req, res) => {
+  res.render('food')
+})
+
+// ABOUT US --------------------------------------------------------------------
+
+ app.get('/aboutus', (req, res) => {
+  res.render('aboutus')
+})
+
+// CONTACT ---------------------------------------------------------------------
+
+app.get('/contact', (req, res) => {
+  res.render('contact')
+})
+
+// BUSINESS MODEL --------------------------------------------------------------
+
+app.get('/businessmodel', (req, res) => {
+    res.render('businessmodel')
+})
+
+// ENABLE SEQUELIZE.SYNC -------------------------------------------------------
 
 sequelize.sync({force: false})
 
 // CONFIGURE PORT - ------------------------------------------------------------
 
- app.listen(3018, () => {
-     console.log('App is running on port 3018');
+ app.listen(3000, () => {
+     console.log('App is running on port 3000');
  })
 
-// START SERVER AND SEQUELIZE ------------------------------------------------------
+// START SERVER AND SEQUELIZE --------------------------------------------------
 
 // sequelize.sync({force: false})
 // .then(() => {
