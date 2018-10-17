@@ -62,14 +62,16 @@ const Business = sequelize.define('business',{
   },
   password: {
     type: Sequelize.STRING,
-    unique: false
-}, {timestamps: false});
+    unique: false,
+  }
+});
 
 const Offer = sequelize.define('offers', {
   body: {
     type: Sequelize.TEXT,
     allowNull: false
-}, {timestamps: false});
+  }
+});
 
 const Time = sequelize.define('time', {
   time: {
@@ -78,9 +80,9 @@ const Time = sequelize.define('time', {
   },
   day: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   }
-}, {timestamps: false});
+});
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
   Business.hasMany(Offer, { foreignKey: { allowNull: false } });
