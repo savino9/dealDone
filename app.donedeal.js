@@ -9,7 +9,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
 const app = express();
 
-// require('dotenv').config();
+require('dotenv').config();
 
 // CONNECT WITH TEMPLATE ENGINE FOLDER -----------------------------------------
 
@@ -18,11 +18,10 @@ app.set('view engine', 'ejs');
 
 // DATABASE ---------------------------------------------------------
 
-const sequelize = new Sequelize('happyhour', 'postgres', 'p0stgr3SQL', {
+const sequelize = new Sequelize('donedeal', process.env.POSTGRES_USER, process.env.POSTGRES_USER, {
     host: 'localhost',
     dialect: 'postgres'
 });
-
 
 // SET UP SESSION --------------------------------------------------------------
 
@@ -45,14 +44,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('./public'));
 
+// DATABASE ---------------------------------------------------------
+
+const sequelize = new Sequelize(process.env.POSTGRES_DB, process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+  host: 'localhost',
+  dialect: 'postgres',
+});
 
 //MODELS DEFINITION ------------------------------------------------------------
 
-const Business = sequelize.define('businesses',{
-  username: {
-    type: Sequelize.STRING,
-    unique: true
-  },
+const Business = sequelize.define('business',{
   name: {
     type: Sequelize.STRING,
     unique: true
@@ -68,21 +69,15 @@ const Business = sequelize.define('businesses',{
   password: {
     type: Sequelize.STRING,
     unique: false
-  },
-},   {
-     timestamps: false
-   })
+}, {timestamps: false});
 
 const Offer = sequelize.define('offers', {
   body: {
     type: Sequelize.TEXT,
     allowNull: false
-  }
-}, {
-    timestamps: false
-  })
+}, {timestamps: false});
 
-const Time = sequelize.define('times', {
+const Time = sequelize.define('time', {
   time: {
     type: Sequelize.STRING,
     allowNull: false
@@ -91,9 +86,11 @@ const Time = sequelize.define('times', {
     type: Sequelize.STRING,
     allowNull: false
   }
-}, {
-    timestamps: false
-  })
+}, {timestamps: false});
+
+// TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
+  Business.hasMany(Offer, { foreignKey: { allowNull: false } });
+  Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
   Business.hasMany(Offer, { foreignKey: { allowNull: false } });
@@ -235,21 +232,11 @@ app.get('/businessmodel', (req, res) => {
     res.render('businessmodel')
 })
 
-// ENABLE SEQUELIZE.SYNC -------------------------------------------------------
+// START SERVER AND SEQUELIZE ------------------------------------------------------
 
-sequelize.sync({force: false})
-
-// CONFIGURE PORT - ------------------------------------------------------------
-
- app.listen(3000, () => {
-     console.log('App is running on port 3000');
- })
-
-// START SERVER AND SEQUELIZE --------------------------------------------------
-
-// sequelize.sync({force: false})
-// .then(() => {
-//   const server = app.listen(3000, () => {
-//     console.log('App is running on port 3000');
-//   });
-// });
+sequelize.sync({force: true})
+.then(() => {
+  const server = app.listen(3000, () => {
+    console.log('App is running on port 3000');
+  });
+});
