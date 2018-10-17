@@ -1,0 +1,81 @@
+/* Day and time selection form */
+
+form {width: 40%;
+      margin-right: 30%;
+      margin-left: 30%;
+      background-color:  rgba(0, 0, 0, 0.6);
+      color: orange;
+      text-align: center;
+      font-family: Helvetica;
+      opacity: 1;
+  }
+
+.form-d, .form-h {
+      flex-basis: 50%;
+  }
+
+div.mainform {width:100%;
+              border:1px solid #000}
+
+
+
+.btn {
+    color: white;
+}
+
+.button_search {
+  color: orange;
+}
+
+
+.bgdrinks {
+    background-image: url(https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-);
+    height: 900px;
+background-position: center; /* Center the image */
+background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover;
+        z-index: -10;
+}
+
+
+
+.card-deck {
+  color: orange;
+  width: 100%
+  font-family: Helvetica;
+}
+
+.card-title {
+  color: orange;
+}
+
+.card-text {
+  color: orange;
+}
+
+
+h1   {
+text-align: left;
+color: white;
+/* -webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: black; */
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.texttitle {
+text-align: left;
+color: white;
+font-family: Arial;
+font-size: 36px;
+/* -webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: black; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}
+
+table table-hover {
+  margin-left: 20px;
+  margin-right: 20px;
+}
