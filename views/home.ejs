@@ -5,10 +5,23 @@
 </head><!-- /head -->
 
 <body>
-
+  
   <header>
     <%- include partials/header.ejs %>
   </header><!-- /header -->
+  
+  <div>
+    <video autoplay muted loop id="video">
+      <source src="src/img/bar.mp4" type="video/mp4">
+    </video>
+    <div class="hero video-title">
+      <hgroup>
+        <h1>Why <span class="bold orange">Done Deal?</span></h1>
+        <h3>Want to go out but have trouble making a decision?</h3>
+      </hgroup>
+      <a href="/howitworks"><button class="btn btn-hero btn-lg" role="button">It's a DONE DEAL</button></a>
+    </div>  
+  </div>
 
   <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
     <!-- Overlay -->
@@ -64,7 +77,7 @@
           <div class="services-inner">
             <div class="our-services-img">
 
-              <img src="http://getdrawings.com/img/silhouette-beer-10.png" width="65px" height="80px" alt="">
+              <img src="http://getdrawings.com/img/silhouette-beer-10.png" width="65px" alt="">
 								</div>
               <div class="our-services-text">
                 <h4>Drinking Deals</h4>
