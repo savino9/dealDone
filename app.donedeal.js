@@ -63,7 +63,7 @@ const Time = sequelize.define('time',{
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
   Business.hasMany(Offer, { foreignKey: { allowNull: false } });
   Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
-
+  Time.belongsTo(Offer, { foreignKey: { allowNull: false } });
 
 // 01: HOME PAGE----------------------------------------------------------------
 
