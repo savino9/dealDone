@@ -1,86 +1,63 @@
 <html>
 
 <head>
-
-  <title>Business Model</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" id="bootstrap-css">
-  <link rel="stylesheet" href="/src/css/style.css">
-  <link rel="stylesheet" href="/src/css/style2.css">
-  <link rel="stylesheet" href="css/try.js">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-</head>
+  <%- include partials/head.ejs %>
+</head><!-- /head -->
 
 <body>
 
-    <%- include partials/navbar.ejs %>
+  <header>
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
 
-      <h1>Would you like to promote your bar or restaurant on our site?</h1>
+  <div class="bgdrinks">
 
-  <div class="bgdrinks"></div>
+      <div class="texttitle">WOULD YOU LIKE TO PROMOTE YOUR BAR OR RESTAURANT<br> ON OUR APPLICATION?</div>
 
-          <div class="container">
-              <h2></h2>
-          	<div class="row">
-          		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-          						<div class="our-services-wrapper mb-60">
-          							<div class="services-inner">
-          								<div class="our-services-img">
+<div class="container">
+  <div class="card-deck">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><strong>FREE</strong></h1><br><br>
+        <p class="card-text">SIGN UP TO OUR SERVICE COMPLETELY FREE OF CHARGE FOR ONE MONTH<br><br>
+          <span class="bold orange">DONE DEAL</span> OFFERS A WAY FOR YOU TO ADVERTISE YOUR BEST OFFERS AND PROMOTIONS TO THOUSANDS OF POTENTIAL CUSTOMERS</p>
+              </div>
+      <div class="card-footer">
+        <small class="text-muted"></small>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><strong>MONTHLY SUBSCRIPTION</strong></h1>
+        <p class="card-text">
+          €9.99 PER MONTH<br><br>
+          ALREADY NOTICED AN INCREASE IN THE NUMBER OF CUSTOMERS VISITING YOUR ESTABLISHMENT?<br><br>
+          THEN SIGN UP FOR A MODEST MONTHLY FEE TO CONTINUE OUT PROFITABLE PARTNERSHIP</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"></small>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><strong>YEARLY SUBSCRIPTION</strong></h1>
+        <p class="card-text">€99.99 FOR 12 MONTHS<br><br>WE OFFER A LONG TERM SUBSCRIPTION PLAN FOR OUR SERVICE<br><br>
+          WANT TO BUILD A LONG TERM BUSINESS PARTNERSHIP?<br><br>IT'S A <span class="bold orange">DONE DEAL</span></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"></small>
+      </div>
+    </div>
+  </div>
+<form>
+  <a href="/signup"><button class="btn btn-hero btn-lg" role="button">Sign Up?</button></a>
+</form>
+</div>
+</div>
 
-          								</div>
-          								<div class="our-services-text">
-          									<h4>Free</h4>
-                            <p>Sign up to our service completely free of charge for one month</p><br>
-                            <p>DONE DEAL offers a way for you to advertise your best offers and promotions to thousand of potential customers<p><br>
-
-          								</div>
-          							</div>
-          						</div>
-          					</div>
-
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                      <div class="our-services-wrapper mb-60">
-                        <div class="services-inner">
-                          <div class="our-services-img">
-
-                          </div>
-                          <div class="our-services-text">
-                            <h4>Monthly Subscription</h4>
-                            <p>€9.99 per month</p><br>
-                            <p>Already noticed an increase in the number of customers visiting your establishment?</p><br>
-                            <p>Then sign up for a modest fee of €9.99 per month to continue our profitable partnership.</p>
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-          					<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-          						<div class="our-services-wrapper mb-60">
-          							<div class="services-inner">
-          								<div class="our-services-img">
-
-          								</div>
-          								<div class="our-services-text">
-          									<h4>Yearly Subscription?</h4>
-                            <p>€99.99 for 12 months</p><br>
-                            <p>We offer a long term-subscription plan for our service</p><br>
-                            <p>Want to build a long term business partnership?</p><br>
-                            <p>It's a DONE DEAL</p>
-          								</div>
-          							</div>
-          						</div>
-          					</div>
-          	</div>
-                     <a href="/signup" class="btn btn-default btn-lg btn-block" role="button">Want to sign up?</a>
-          </div>
-
-  <%- include partials/footer.ejs %>
-
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+    <footer>
+      <%- include partials/footer.ejs %>
+    </footer>
 </body>
 
 </html>

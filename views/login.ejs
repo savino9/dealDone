@@ -1,0 +1,48 @@
+<html>
+
+<head>
+  <%- include partials/head.ejs %>
+</head><!-- /head -->
+
+<body>
+
+  <header>
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
+
+  <!-- <div class="bgdrinks"> -->
+
+    <div class="texttitle"><strong>LOGIN</strong></div>
+
+
+  <form id="login" action="/login" method="POST">
+    <label for="Sign In Text"><h6>Sign in to your account</h6></label>
+    <br>
+    <div class="form-group">
+      <label for="exampleInputUsername">Username:</label><br>
+      <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter Your Username">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword">Password:</label><br>
+        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter Your Password">
+      </div>
+
+        <div class="form-group">
+          <input type="submit" value="Submit">
+      </div>
+  </form>
+
+  <h6>Don't have an account yet?</h6>
+  <h6><a href="/signup" target="_blank">Signup</a></h6><br>
+  <h6><a href="/logout" target="_blank">Logout</a></h6>
+
+<!-- </div> -->
+
+  <footer>
+    <%- include partials/footer.ejs %>
+  </footer>
+
+</body>
+
+</html>

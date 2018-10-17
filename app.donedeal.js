@@ -4,6 +4,8 @@ const Sequelize = require('sequelize');
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
 const app = express();
 
@@ -13,6 +15,26 @@ require('dotenv').config();
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
+
+// DATABASE ---------------------------------------------------------
+
+const sequelize = new Sequelize('donedeal', process.env.POSTGRES_USER, process.env.POSTGRES_USER, {
+    host: 'localhost',
+    dialect: 'postgres'
+});
+
+// SET UP SESSION --------------------------------------------------------------
+
+app.use(session({
+  store: new SequelizeStore({
+    db: sequelize,
+    checkExpirationInterval: 15 * 60 * 1000,
+    expiration: 24 * 60 * 60 * 1000
+  }),
+  secret: "any string",
+  saveUninitialized: true,
+  resave: false
+}))
 
 // SET UP BODY PARSER ----------------------------------------------------------
 
@@ -39,17 +61,23 @@ const Business = sequelize.define('business',{
   address: {
     type: Sequelize.STRING,
     unique: false
-  }
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    unique: false
 }, {timestamps: false});
 
 const Offer = sequelize.define('offers', {
   body: {
     type: Sequelize.TEXT,
     allowNull: false
-  }
 }, {timestamps: false});
 
-const Time = sequelize.define('time',{
+const Time = sequelize.define('time', {
   time: {
     type: Sequelize.STRING,
     allowNull: false
@@ -64,38 +92,141 @@ const Time = sequelize.define('time',{
   Business.hasMany(Offer, { foreignKey: { allowNull: false } });
   Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
+// TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
+  Business.hasMany(Offer, { foreignKey: { allowNull: false } });
+  Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
-// 01: HOME PAGE----------------------------------------------------------------
+// HOME PAGE -------------------------------------------------------------------
 
 app.get('/', (req, res) => {
     res.render('home')
 })
 
-// 02: DRINKS PAGE -------------------------------------------------------------
+// LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
+
+app.get('/login', (req, res) => {
+  var business = req.session.business;
+    res.render('login')
+})
+
+app.post('/login', function (req, res) {
+
+    let username = req.body.username;
+    let password = req.body.password;
+
+    if(username.length === 0) {
+      res.redirect('/?message=' + encodeURIComponent("Please fill in your correct username."));
+      return;
+    }
+
+    if(password.length === 0) {
+      res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
+      return;
+    }
+
+    Business.findOne({
+  		where: {
+  			username: username
+  		}
+  	}).then(function(business){
+
+  			if(business!== null && password === business.password){
+          console.log("business info" + JSON.stringify(business.dataValues));
+          req.session.business = business;
+  				res.redirect('/profile');
+  			} else {
+  				res.redirect('/?message=' + encodeURIComponent('Invalid email or password.'));
+  			}
+  	});
+  });
+
+// LOG OUT ---------------------------------------------------------------------
+
+app.get('/logout', (req,res)=>{
+  req.session.destroy(function(error) {
+    if(error) {
+      throw error;
+    }
+    res.redirect('/?message=' + encodeURIComponent("Successfully logged out."));
+  })
+})
+
+// SIGN UP ---------------------------------------------------------------------
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
+})
+
+app.post('/signup', (req,res) => {
+
+  let inputusername = req.body.username
+  let inputname = req.body.name
+  let inputaddress = req.body.address
+  let inputemail = req.body.email
+  let inputpassword = req.body.password
+  let inputconfirmpassword = req.body.confirmpassword
+
+  if (inputpassword !== inputconfirmpassword) {
+    res.send('Your password does not match');
+  } else {
+  Business.create({
+    username: inputusername,
+    name: inputname,
+    address: inputaddress,
+    email: inputemail,
+    password: inputpassword,
+  })
+
+  .then((business) => {
+        req.session.business = business;
+        res.redirect('/profile');
+      });
+    }
+})
+
+// BUSINESS PROFILE ------------------------------------------------------------
+
+app.get('/profile', (req, res)=> {
+
+  const business = req.session.business;
+  if(business != null){
+  res.render('profile', {business: business})             // message: message
+}else{
+    res.redirect('/')
+}
+})
+
+// BUSINESS CREATE OFFER -------------------------------------------------------
+
+// BUSINESS UPDATE OFFERS ------------------------------------------------------
+
+// BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
+
+// DRINKS SEARCH PAGE ----------------------------------------------------------
 
 app.get('/drinks', (req, res) => {
   res.render('drinks')
 })
 
-// 03: FOOD PAGE ---------------------------------------------------------------
+// FOOD SEARCH PAGE ------------------------------------------------------------
 
 app.get('/food', (req, res) => {
   res.render('food')
 })
 
-// 04: ABOUT US ----------------------------------------------------------------
+// ABOUT US --------------------------------------------------------------------
 
  app.get('/aboutus', (req, res) => {
   res.render('aboutus')
 })
 
-// 05: CONTACT -----------------------------------------------------------------
+// CONTACT ---------------------------------------------------------------------
 
 app.get('/contact', (req, res) => {
   res.render('contact')
 })
 
-// 06: BUSINESS MODEL ----------------------------------------------------------
+// BUSINESS MODEL --------------------------------------------------------------
 
 app.get('/businessmodel', (req, res) => {
     res.render('businessmodel')
