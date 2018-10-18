@@ -64,14 +64,18 @@ const Business = sequelize.define('business',{
     type: Sequelize.STRING,
     unique: false,
   }
-});
+},  {
+   timestamps: false
+ });
 
 const Offer = sequelize.define('offers', {
   body: {
     type: Sequelize.TEXT,
     allowNull: false
   }
-});
+},  {
+   timestamps: false
+ });
 
 const Time = sequelize.define('time', {
   time: {
@@ -81,12 +85,18 @@ const Time = sequelize.define('time', {
   day: {
     type: Sequelize.STRING,
     allowNull: false,
-  }
-});
+  },
+}, {
+   timestamps: false
+ });
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
   Business.hasMany(Offer, { foreignKey: { allowNull: false } });
   Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
+
+  Time.hasMany(Offer, { foreignKey: { allowNull: false } });
+  Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
+  // Offer.hasMany(Time, { foreignKey: { allowNull: false } });
 
 // HOME PAGE -------------------------------------------------------------------
 
@@ -188,11 +198,71 @@ app.get('/profile', (req, res)=> {
 }
 })
 
+// 06: CREATE AN OFFER ---------------------------------------------------------
+
+app.get('/createoffer', (req,res)=>{
+    res.render('createoffer')
+})
+
+app.post('/createoffer', (req, res) => {
+
+    var name = req.body.offer_name;
+    // var title = req.body.offer_title;
+    var body = req.body.offer_content;
+    var business = req.session.business;
+    // var time = req.session.time;
+    var time = req.body.time_time;
+    var day = req.body.time_day;
+
+    Time.findOne({
+      where: {
+        time: time,
+        day: day,
+      }
+    }).then(timeone => {
+      Offer.create({
+          body: body,
+          time: time,
+          day: day,
+          businessId: business.id,
+          timeId: timeone.id
+      })
+    })
+        .then((offer) => {
+          console.log(offer)
+            res.redirect('/offers')
+        })
+        .catch((err)=>{
+            console.log("ERROR " + err);
+        });
+})
+
 // BUSINESS CREATE OFFER -------------------------------------------------------
 
 // BUSINESS UPDATE OFFERS ------------------------------------------------------
 
 // BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
+
+app.get('/offers', (req, res)=>{
+    Offer.findAll({
+      include:[{
+        model: Business
+      },{
+        model: Time
+        }]
+    })
+    .then((alloffers)=>{
+      res.render('offers', {offers: alloffers})
+    })
+})
+
+// DISPLAY ALL OFFERS ----------------------------------------------------------
+
+// HOW IT WORKS PAGE ----------------------------------------------------------
+
+app.get('/howitworks', (req, res) => {
+  res.render('howitworks')
+})
 
 // DRINKS SEARCH PAGE ----------------------------------------------------------
 
@@ -205,6 +275,65 @@ app.get('/drinks', (req, res) => {
 app.get('/food', (req, res) => {
   res.render('food')
 })
+
+// DEAL SEARCH PAGE ----------------------------------------------------------
+
+app.get('/dealsearch', (req, res) => {
+  res.render('dealsearch')
+})
+
+app.post('/dealsearch', (req, res) => {
+
+    // var name = req.body.offer_name;
+    // var title = req.body.offer_title;
+    var body = req.body.offer_content;
+    var business = req.session.business;
+    // var time = req.session.time;
+    var time = req.body.time_time;
+    var day = req.body.time_day;
+
+    Time.findAll({
+      where: {
+        time: time,
+        day: day,
+      }
+    }).then(timeone => {
+      Offer.create({
+          body: body,
+          time: time,
+          day: day,
+          businessId: business.id,
+          timeId: timeone.id
+      })
+    })
+        .then((offer) => {
+          console.log(dealresult)
+            res.redirect('/dealresult')
+        })
+        .catch((err)=>{
+            console.log("ERROR " + err);
+        });
+})
+
+// DEAL RESULT PAGE ----------------------------------------------------------
+
+// app.get('/dealresult', (req, res) => {
+//   res.render('dealresult')
+// })
+
+app.get('/dealresult', (req, res)=>{
+    Offer.findAll({
+      include:[{
+        model: Business
+      },{
+        model: Time
+        }]
+    })
+    .then((alloffers)=>{
+      res.render('dealresult', {offers: alloffers})
+    })
+})
+
 
 // ABOUT US --------------------------------------------------------------------
 
@@ -226,7 +355,7 @@ app.get('/businessmodel', (req, res) => {
 
 // START SERVER AND SEQUELIZE ------------------------------------------------------
 
-sequelize.sync({force: true})
+sequelize.sync({force: false})
 .then(() => {
   const server = app.listen(3000, () => {
     console.log('App is running on port 3000');
