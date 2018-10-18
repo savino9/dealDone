@@ -91,8 +91,9 @@ const Time = sequelize.define('time', {
  });
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
-  Business.hasMany(Offer, { foreignKey: { allowNull: false } });
-  Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
+
+Business.hasMany(Offer, { foreignKey: { allowNull: false } });
+Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
   Time.hasMany(Offer, { foreignKey: { allowNull: false } });
   Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
@@ -101,7 +102,7 @@ const Time = sequelize.define('time', {
 // HOME PAGE -------------------------------------------------------------------
 
 app.get('/', (req, res) => {
-    res.render('home')
+  res.render('home')
 })
 
 // LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
@@ -111,47 +112,46 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.post('/login', function (req, res) {
+app.post('/login', (req, res) => {
+  let name = req.body.name;
+  let password = req.body.password;
 
-    let username = req.body.username;
-    let password = req.body.password;
+  if(name.length === 0) {
+    res.redirect('/?message=' + encodeURIComponent("Please fill in your correct username."));
+    return;
+  }
 
-    if(username.length === 0) {
-      res.redirect('/?message=' + encodeURIComponent("Please fill in your correct username."));
-      return;
-    }
+  if(password.length === 0) {
+    res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
+    return;
+  }
 
-    if(password.length === 0) {
-      res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
-      return;
-    }
-
-    Business.findOne({
-  		where: {
-  			username: username
-  		}
-  	}).then(function(business){
-
-  			if(business!== null && password === business.password){
-          console.log("business info" + JSON.stringify(business.dataValues));
-          req.session.business = business;
-  				res.redirect('/profile');
-  			} else {
-  				res.redirect('/?message=' + encodeURIComponent('Invalid email or password.'));
-  			}
-  	});
-  });
+  Business.findOne({
+		where: {
+			name: name
+		}
+	})
+  .then( business =>{
+		if(business !== null && password === business.password){
+      console.log("business info" + JSON.stringify(business.dataValues));
+      req.session.business = business;
+			res.redirect('/profile');
+		} else {
+			res.redirect('/?message=' + encodeURIComponent('Invalid email or password.'));
+		}
+	});
+});
 
 // LOG OUT ---------------------------------------------------------------------
 
-app.get('/logout', (req,res)=>{
-  req.session.destroy(function(error) {
-    if(error) {
-      throw error;
+app.get('/logout', (req,res) => {
+  req.session.destroy((error) => {
+    if (err) {
+      throw err
     }
     res.redirect('/?message=' + encodeURIComponent("Successfully logged out."));
   })
-})
+});
 
 // SIGN UP ---------------------------------------------------------------------
 
@@ -160,8 +160,6 @@ app.get('/signup', (req, res) => {
 })
 
 app.post('/signup', (req,res) => {
-
-  let inputusername = req.body.username
   let inputname = req.body.name
   let inputaddress = req.body.address
   let inputemail = req.body.email
@@ -172,31 +170,54 @@ app.post('/signup', (req,res) => {
     res.send('Your password does not match');
   } else {
   Business.create({
-    username: inputusername,
     name: inputname,
     address: inputaddress,
     email: inputemail,
     password: inputpassword,
-  })
-
-  .then((business) => {
-        req.session.business = business;
-        res.redirect('/profile');
-      });
-    }
-})
+  }).then((business) => {
+    req.session.business = business;
+    res.redirect('/profile');
+  });
+  }
+});
 
 // BUSINESS PROFILE ------------------------------------------------------------
 
 app.get('/profile', (req, res)=> {
-
   const business = req.session.business;
-  if(business != null){
-  res.render('profile', {business: business})             // message: message
-}else{
+  if(business !== null){
+    res.render('profile', {business: business})             // message: message
+  } else {
     res.redirect('/')
-}
-})
+  }
+});
+
+// SEARCH ----------------------------------------------------------------------
+app.post('/search' , (req, res) => {
+  let searched_name = req.body.name;
+  let b_found = [];
+
+  console.log(`request body: ${searched_name}`);
+
+  Business.findAll()
+  .then( business => {
+    console.log(`business after findAll: ${business}`);
+  
+    for (var i = 0; i < business.length; i++) {
+      let name = business[i].name.toLowerCase();
+      searched_name.toLowerCase();
+      
+      if (searched_name === business[i].name) {
+        console.log(`yeeah ${searched_name}, you're in the server!`);
+        b_found.push(business[i].name);
+        console.log(`new array with results: ${b_found}`);
+      } 
+    }
+    res.render('results' , {
+      b_found: b_found  
+    });
+  })
+});
 
 // 06: CREATE AN OFFER ---------------------------------------------------------
 
