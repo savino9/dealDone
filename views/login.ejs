@@ -2,47 +2,70 @@
 
 <head>
   <%- include partials/head.ejs %>
+
+  <!-- <script type="text/css" src="src/css/signin.css"></script> -->
+  <link rel="stylesheet" href="src/css/signin.css">
+
 </head><!-- /head -->
 
 <body>
 
   <header>
+
+
     <%- include partials/header.ejs %>
   </header><!-- /header -->
 
-  <!-- <div class="bgdrinks"> -->
 
-    <div class="texttitle"><strong>LOGIN</strong></div>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    <label>
+                        Enter the email you signed up with</label>
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    Login</p>
+                <form class="login">
+                <input type="text" placeholder="Username" />
+                <input type="password" placeholder="Password" />
+                <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                <div class="remember-forgot">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" />
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 forgot-pass-content">
+                            <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   <!--  <div class="posted-by">Posted By: <a href="http://www.jquery2dotnet.com">Bhaumik Patel</a></div> -->
+</div>
 
 
-  <form id="login" action="/login" method="post">
-    <label for="Sign In Text"><h6>Sign in to your account</h6></label>
-    <br>
-    <div class="form-group">
-      <label for="exampleInputUsername">Name:</label><br>
-      <input type="text" name="name" class="form-control" id="name" aria-describedby="usernameHelp" placeholder="Business Name">
-      </div>
 
-      <div class="form-group">
-        <label for="exampleInputPassword">Password:</label><br>
-        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter Your Password">
-      </div>
-
-        <div class="form-group">
-          <input type="submit" value="Submit">
-      </div>
-  </form>
-
-  <h6>Don't have an account yet?</h6>
-  <h6><a href="/signup" target="_blank">Signup</a></h6><br>
-  <h6><a href="/logout" target="_blank">Logout</a></h6>
-
-<!-- </div> -->
-
-  <footer>
-    <%- include partials/footer.ejs %>
-  </footer>
+<footer>
+  <%- include partials/footer.ejs %>
+</footer>
 
 </body>
-
 </html>

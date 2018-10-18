@@ -92,6 +92,8 @@ table table-hover {
   color: orange;
 }
 
+/*===================*/
+
 .bgdrinks {
   background-image: url("/src/img/Background_1.jpg");
   filter:brightness(100%);
@@ -102,7 +104,21 @@ table table-hover {
   background-size: cover;
 }
 
-/*===================*/
+/*=======PARALLAX=======*/
+
+.parallax { 
+  /* The image used */
+  background-image: url("../img/bottles.jpg");
+
+  /* Set a specific height */
+  height: 500px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .card-deck {
   color: orange;
