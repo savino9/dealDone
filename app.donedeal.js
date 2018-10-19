@@ -188,7 +188,7 @@ app.get('/profile', (req, res)=> {
   if(business !== null){
     res.render('profile', {business: business})             // message: message
   } else {
-    res.redirect('/')
+    res.redirect('/login')
   }
 });
 
@@ -202,19 +202,19 @@ app.post('/search' , (req, res) => {
   Business.findAll()
   .then( business => {
     console.log(`business after findAll: ${business}`);
-  
+
     for (var i = 0; i < business.length; i++) {
       let name = business[i].name.toLowerCase();
       searched_name.toLowerCase();
-      
+
       if (searched_name === business[i].name) {
         console.log(`yeeah ${searched_name}, you're in the server!`);
         b_found.push(business[i].name);
         console.log(`new array with results: ${b_found}`);
-      } 
+      }
     }
     res.render('results' , {
-      b_found: b_found  
+      b_found: b_found
     });
   })
 });
@@ -285,17 +285,17 @@ app.get('/howitworks', (req, res) => {
   res.render('howitworks')
 })
 
-// DRINKS SEARCH PAGE ----------------------------------------------------------
-
-app.get('/drinks', (req, res) => {
-  res.render('drinks')
-})
-
-// FOOD SEARCH PAGE ------------------------------------------------------------
-
-app.get('/food', (req, res) => {
-  res.render('food')
-})
+// // DRINKS SEARCH PAGE ----------------------------------------------------------
+//
+// app.get('/drinks', (req, res) => {
+//   res.render('drinks')
+// })
+//
+// // FOOD SEARCH PAGE ------------------------------------------------------------
+//
+// app.get('/food', (req, res) => {
+//   res.render('food')
+// })
 
 // DEAL SEARCH PAGE ----------------------------------------------------------
 
@@ -306,29 +306,19 @@ app.get('/dealsearch', (req, res) => {
 app.post('/dealsearch', (req, res) => {
 
     // var name = req.body.offer_name;
-    // var title = req.body.offer_title;
-    var body = req.body.offer_content;
+    // var body = req.body.offer_content;
     var business = req.session.business;
     // var time = req.session.time;
     var time = req.body.time_time;
     var day = req.body.time_day;
 
-    Time.findAll({
+    Time.findOne({
       where: {
         time: time,
         day: day,
       }
-    }).then(timeone => {
-      Offer.create({
-          body: body,
-          time: time,
-          day: day,
-          businessId: business.id,
-          timeId: timeone.id
-      })
-    })
-        .then((offer) => {
-          console.log(dealresult)
+    }).then((offer) => {
+          console.log("test")
             res.redirect('/dealresult')
         })
         .catch((err)=>{
@@ -343,7 +333,7 @@ app.post('/dealsearch', (req, res) => {
 // })
 
 app.get('/dealresult', (req, res)=>{
-    Offer.findAll({
+    Offer.findOne({
       include:[{
         model: Business
       },{
