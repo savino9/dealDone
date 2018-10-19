@@ -106,12 +106,12 @@ table table-hover {
 
 /*=======PARALLAX=======*/
 
-.parallax { 
+.parallax {
   /* The image used */
   background-image: url("../img/bottles.jpg");
 
   /* Set a specific height */
-  height: 500px; 
+  height: 500px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -141,6 +141,8 @@ table table-hover {
 .containermatches {
   margin-left: 25px;
   margin-right: 25px;
+  background-color:  rgba(0, 0, 0, 0.6);
+  color: white;
 }
 
 .background {
@@ -196,4 +198,3 @@ table table-hover {
 .stars {
   margin:20px auto 1px;
 }
-

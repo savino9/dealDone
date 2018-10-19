@@ -113,39 +113,41 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  let name = req.body.name;
+  let email = req.body.email;
   let password = req.body.password;
 
-  if(name.length === 0) {
-    res.redirect('/?message=' + encodeURIComponent("Please fill in your correct username."));
+  if(email.length === 0) {
+    res.redirect('/?message=' + encodeURIComponent("Please fill in your correct email."));
     return;
   }
 
-  if(password.length === 0) {
+  else if(password.length === 0) {
     res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
     return;
-  }
+  } else {
 
   Business.findOne({
 		where: {
-			name: name
+			email: email
 		}
 	})
   .then( business =>{
+    let password = req.body.password;
+    req.session.business = business;
 		if(business !== null && password === business.password){
       console.log("business info" + JSON.stringify(business.dataValues));
-      req.session.business = business;
-			res.redirect('/profile');
+			res.render('profile', {business: business});
 		} else {
 			res.redirect('/?message=' + encodeURIComponent('Invalid email or password.'));
 		}
 	});
+}
 });
 
 // LOG OUT ---------------------------------------------------------------------
 
 app.get('/logout', (req,res) => {
-  req.session.destroy((error) => {
+  req.session.destroy((err) => {
     if (err) {
       throw err
     }
@@ -184,11 +186,11 @@ app.post('/signup', (req,res) => {
 // BUSINESS PROFILE ------------------------------------------------------------
 
 app.get('/profile', (req, res)=> {
-  const business = req.session.business;
+  let business = req.session.business;
   if(business !== null){
     res.render('profile', {business: business})             // message: message
   } else {
-    res.redirect('/login')
+    res.render('login')
   }
 });
 
@@ -213,7 +215,7 @@ app.post('/search' , (req, res) => {
         console.log(`new array with results: ${b_found}`);
       }
     }
-    res.render('results' , {
+    res.render('results', {
       b_found: b_found
     });
   })
@@ -305,45 +307,103 @@ app.get('/dealsearch', (req, res) => {
 
 app.post('/dealsearch', (req, res) => {
 
+    var day = req.body.time_day;
+    var time = req.body.time_time;
+
+      Time.findOne({
+        where: {
+          day: day,
+          time: time
+        }
+      })
+      .then(time => {
+        return Offer.findAll({
+          where: {
+            timeId: time.id
+          },
+          include: [{model: Business}, {model: Time}]
+        })
+      })
+      .then((offers)=>{
+          if (day === null && time === null){
+          res.redirect('dealresultnomatch');
+        } else {
+        res.render('dealresult', {offers: offers})
+      }
+      // .catch((err)=>{
+      //     console.log("ERROR " + err);
+      // });
+    })
+  })
+
+    app.get('/dealresult', (req, res)=>{
+
+      Offer.findAll({include: [{model: Business}, {model: Time}]})
+      .then(offers=>{
+        res.render('dealresult', {offers: offers})
+      })
+    })
+
     // var name = req.body.offer_name;
     // var body = req.body.offer_content;
-    var business = req.session.business;
+    // var business = req.session.business;
     // var time = req.session.time;
-    var time = req.body.time_time;
-    var day = req.body.time_day;
+    // Time.findAll({
+    //   where: {
+    //     day: day,
+    //     time: time,
+    //   }
+    // }).then((offer) => {
+          // console.log("-------------"+offer)
+        //     res.redirect('/dealresult')
+        // })
 
-    Time.findOne({
-      where: {
-        time: time,
-        day: day,
-      }
-    }).then((offer) => {
-          console.log("test")
-            res.redirect('/dealresult')
-        })
-        .catch((err)=>{
-            console.log("ERROR " + err);
-        });
-})
+
 
 // DEAL RESULT PAGE ----------------------------------------------------------
 
-// app.get('/dealresult', (req, res) => {
-//   res.render('dealresult')
+// app.post('/dealresult', (req, res) => {
+//   let day= req.body.time_day;
+//   let time= req.body.time_time;
+//   console.log("___________"+day)
+//     Time.findOne({
+//       where: {
+//         day: day,
+//         time: time
+//       }
+//     })
+//     .then(time => {
+//       return Offer.findAll({
+//         where: {
+//           timeId: time.id
+//         },
+//         include: [{model: Business}]
+//       })
+//     })
+//     .then((offers)=>{
+//       console.log("-----------------------------"+offers)
+//       res.render('dealresult', {offers: offers})
+//     })
 // })
 
-app.get('/dealresult', (req, res)=>{
-    Offer.findOne({
-      include:[{
-        model: Business
-      },{
-        model: Time
-        }]
-    })
-    .then((alloffers)=>{
-      res.render('dealresult', {offers: alloffers})
-    })
-})
+// app.get('/dealresult', (req, res)=>{
+//     res.render('dealresult', {offers: offers})
+//
+//   let day= req.body.time_day;
+//   console.log("___________"+day)
+//     Time.findAll({
+//       where: {
+//         day: day
+//       },
+//       include:[{
+//         model: Offer
+//         }]
+//     })
+//     .then((offer)=>{
+//       console.log("-----------------------------"+offer)
+//
+//     })
+// })
 
 
 // ABOUT US --------------------------------------------------------------------
