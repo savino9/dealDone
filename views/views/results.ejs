@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <%- include partials/head.ejs %>
+</head><!-- /head -->
+
+<body>
+
+  <header>
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
+
+  <main>
+    <div style="min-height: 200px; padding: 20px;">
+      <% if (b_found.length > 0) { %>
+        User details:
+        <li>Name: <%= b_found[0] %> </li>
+      <% } else { %>
+        <li>Sorry user not found!</li>
+      <% } %>
+    </div>
+  </main>
+
+<footer>
+  <%- include partials/footer.ejs %>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "assignment_17_group_project",
+  "version": "1.0.0",
+  "description": "group project",
+  "main": "app.donedeal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.donedeal.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-session-sequelize": "^5.2.2",
+    "dotenv": "^6.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "pg": "^7.5.0",
+    "sequelize": "^4.39.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConorJosephC/dealDone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ConorJosephC/dealDone/issues"
+  },
+  "homepage": "https://github.com/ConorJosephC/dealDone#readme"
+}
