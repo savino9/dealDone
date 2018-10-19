@@ -67,28 +67,6 @@
 Fade content bs-carousel with hero headers
 */
 
-/********************************/
-/*       Fade Bs-carousel       */
-/********************************/
-.fade-carousel {
-    position: relative;
-    height: 100vh;
-}
-.fade-carousel .carousel-inner .item {
-    height: 100vh;
-}
-.fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
-    background-color: #f39c12;
-    border-color: #f39c12;
-    opacity: .7;
-}
-.fade-carousel .carousel-indicators > li.active {
-  width: 10px;
-  height: 10px;
-  opacity: 1;
-}
-
 /*===========VIDEO=========*/
 #video {
   width: 100%;
@@ -159,11 +137,10 @@ Fade content bs-carousel with hero headers
 .btn.btn-hero,
 .btn.btn-hero:hover,
 .btn.btn-hero:focus {
-  text-align: center;
+    text-align: center;
     vertical-align: bottom;
     color: #f5f5f5;
     background-color: orange;
-    border-color: black;
     outline: none;
     margin: 20px auto;
 }
