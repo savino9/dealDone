@@ -47,7 +47,6 @@ app.use(express.static('./public'));
 
 
 //MODELS DEFINITION ------------------------------------------------------------
-
 const Business = sequelize.define('business',{
   name: {
     type: Sequelize.STRING,
@@ -92,7 +91,6 @@ const Time = sequelize.define('time', {
  });
 
 // TABLES RELATIONSHIP/ASSOCIATION ---------------------------------------------
-
 Business.hasMany(Offer, { foreignKey: { allowNull: false } });
 Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
@@ -100,16 +98,14 @@ Time.hasMany(Offer, { foreignKey: { allowNull: false } });
 Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
 
 // HOME PAGE -------------------------------------------------------------------
-
 app.get('/', (req, res) => {
   res.render('home')
 })
 
 // LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
-
 app.get('/login', (req, res) => {
   let business = req.session.business;
-    res.render('login')
+  res.render('login')
 })
 
 app.post('/login', (req, res) => {
@@ -144,7 +140,6 @@ app.post('/login', (req, res) => {
 });
 
 // LOG OUT ---------------------------------------------------------------------
-
 app.get('/logout', (req,res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -228,11 +223,11 @@ app.post('/search' , (req, res) => {
 });
 
 // 06: CREATE AN OFFER ---------------------------------------------------------
-
 app.get('/createoffer', (req,res)=>{
   res.render('createoffer')
 })
 
+// BUSINESS CREATE OFFER -------------------------------------------------------
 app.post('/createoffer', (req, res) => {
   const {offer_content, time_time, time_day} = req.body;
   let business = req.session.business;
@@ -260,12 +255,9 @@ app.post('/createoffer', (req, res) => {
   });
 })
 
-// BUSINESS CREATE OFFER -------------------------------------------------------
-
 // BUSINESS UPDATE OFFERS ------------------------------------------------------
 
 // BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
-
 app.get('/offers', (req, res)=>{
   Offer.findAll({
     include:[{
@@ -286,73 +278,62 @@ app.get('/howitworks', (req, res) => {
 })
 
 // DEAL SEARCH PAGE ----------------------------------------------------------
-
 app.get('/dealsearch', (req, res) => {
   res.render('dealsearch')
 })
 
 app.post('/dealsearch', (req, res) => {
-
-    var day = req.body.time_day;
-    var time = req.body.time_time;
-
-      Time.findOne({
-        where: {
-          day: day,
-          time: time
-        }
-      })
-      .then(time => {
-        return Offer.findAll({
-          where: {
-            timeId: time.id
-          },
-          include: [{model: Business}, {model: Time}]
-        })
-      })
-      .then((offers)=>{
-          if (day === null && time === null){
-          res.redirect('dealresultnomatch');
-        } else {
-        res.render('dealresult', {offers: offers})
-      }
-      // .catch((err)=>{
-      //     console.log("ERROR " + err);
-      // });
+  const {time_day, time_time} = req.body;
+  Time.findOne({
+    where: {
+      day: day,
+      time: time
+    }
+  })
+  .then(time => {
+    return Offer.findAll({
+      where: {
+        timeId: time.id
+      },
+      include: [{model: Business}, {model: Time}]
     })
   })
+  .then((offers)=>{
+    if (day === null && time === null){
+      res.redirect('dealresultnomatch');
+    } else {
+      res.render('dealresult', {offers: offers})
+    }
+  })
+  .catch((err)=>{
+    console.error(err);
+  });
+})
 
 // DISPLAY ALL OFFERS ----------------------------------------------------------
-
 app.get('/dealresult', (req, res)=>{
-
   Offer.findAll({include: [{model: Business}, {model: Time}]})
   .then(offers=>{
     res.render('dealresult', {offers: offers})
   })
 })
 
-
 // ABOUT US --------------------------------------------------------------------
-
  app.get('/aboutus', (req, res) => {
   res.render('aboutus')
 })
 
 // CONTACT ---------------------------------------------------------------------
-
 app.get('/contact', (req, res) => {
   res.render('contact')
 })
 
 // BUSINESS MODEL --------------------------------------------------------------
-
 app.get('/businessmodel', (req, res) => {
-    res.render('businessmodel')
+  res.render('businessmodel')
 })
 
 // START SERVER AND SEQUELIZE ------------------------------------------------------
-
 sequelize.sync({force: false})
 .then(() => {
   const server = app.listen(3000, () => {

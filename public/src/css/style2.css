@@ -163,7 +163,7 @@ Fade content bs-carousel with hero headers
     vertical-align: bottom;
     color: #f5f5f5;
     background-color: orange;
-    border-color: black;
+    /*border-color: black;*/
     outline: none;
     margin: 20px auto;
 }
