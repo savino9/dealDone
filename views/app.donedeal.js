@@ -5,7 +5,8 @@ const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const bcrypt = require('bcrypt');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 
@@ -19,8 +20,8 @@ app.set('view engine', 'ejs');
 // DATABASE ---------------------------------------------------------
 
 const sequelize = new Sequelize('donedeal', process.env.POSTGRES_USER, process.env.POSTGRES_USER, {
-    host: 'localhost',
-    dialect: 'postgres'
+  host: 'localhost',
+  dialect: 'postgres'
 });
 
 // SET UP SESSION --------------------------------------------------------------
@@ -95,8 +96,8 @@ const Time = sequelize.define('time', {
 Business.hasMany(Offer, { foreignKey: { allowNull: false } });
 Offer.belongsTo(Business, { foreignKey: { allowNull: false } });
 
-  Time.hasMany(Offer, { foreignKey: { allowNull: false } });
-  Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
+Time.hasMany(Offer, { foreignKey: { allowNull: false } });
+Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
 
 // HOME PAGE -------------------------------------------------------------------
 
@@ -107,40 +108,39 @@ app.get('/', (req, res) => {
 // LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
 
 app.get('/login', (req, res) => {
-  var business = req.session.business;
+  let business = req.session.business;
     res.render('login')
 })
 
 app.post('/login', (req, res) => {
-  let email = req.body.email;
-  let password = req.body.password;
-
+  const {email, password} = req.body;
   if(email.length === 0) {
     res.redirect('/?message=' + encodeURIComponent("Please fill in your correct email."));
     return;
   }
-
-  else if(password.length === 0) {
+  if(password.length === 0) {
     res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
     return;
-  } else {
-
+  } 
   Business.findOne({
 		where: {
 			email: email
 		}
 	})
-  .then( business =>{
-    let password = req.body.password;
-    req.session.business = business;
-		if(business !== null && password === business.password){
-      console.log("business info" + JSON.stringify(business.dataValues));
-			res.render('profile', {business: business});
-		} else {
-			res.redirect('/?message=' + encodeURIComponent('Invalid email or password.'));
-		}
-	});
-}
+  .then((business) => { 
+    if(business !== undefined ) {
+      let hash = business.password;
+      bcrypt.compare(password, hash,(err, result) => {
+        req.session.business = business;
+        res.redirect('/profile');
+      });
+    } else {
+      res.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
+    } 
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 });
 
 // LOG OUT ---------------------------------------------------------------------
@@ -150,46 +150,60 @@ app.get('/logout', (req,res) => {
     if (err) {
       throw err
     }
-    res.redirect('/?message=' + encodeURIComponent("Successfully logged out."));
+    res.redirect('/?message=' + encodeURIComponent("logged-out"));
   })
 });
 
 // SIGN UP ---------------------------------------------------------------------
-
 app.get('/signup', (req, res) => {
   res.render('signup');
 })
 
+// SIGN UP POST
 app.post('/signup', (req,res) => {
-  let inputname = req.body.name
-  let inputaddress = req.body.address
-  let inputemail = req.body.email
-  let inputpassword = req.body.password
-  let inputconfirmpassword = req.body.confirmpassword
-
-  if (inputpassword !== inputconfirmpassword) {
-    res.send('Your password does not match');
-  } else {
+  const {name, address, email, password} = req.body;
   Business.create({
-    name: inputname,
-    address: inputaddress,
-    email: inputemail,
-    password: inputpassword,
-  }).then((business) => {
+    name: name,
+    address: address,
+    email: email,
+    password: password,
+  })
+  .then((business) => {
     req.session.business = business;
     res.redirect('/profile');
   });
+  Business.beforeCreate((business, options) => {
+  return cryptPassword(business.password)
+    .then(success => {
+      business.password = success;
+    })
+    .catch(err => {
+      if (err) console.log(err);
+    });
+  });
+  function cryptPassword(password) {
+    return new Promise((resolve, reject) => {
+      bcrypt.genSalt(10, (err, salt) => {
+        // Encrypt password using bycrpt module
+        if (err) return reject(err);
+        bcrypt.hash(password, salt,(err, hash) => {
+          if (err) return reject(err);
+          return resolve(hash);
+        });
+      });
+    });
   }
 });
 
 // BUSINESS PROFILE ------------------------------------------------------------
-
 app.get('/profile', (req, res)=> {
-  let business = req.session.business;
-  if(business !== null){
-    res.render('profile', {business: business})             // message: message
+  const {business} = req.session;
+  if(business === undefined){
+    res.redirect('/?message=' + encodeURIComponent("Please-log-in-to-view-your-profile"));
   } else {
-    res.render('login')
+    res.render('profile', {
+      business: business
+    });
   }
 });
 
@@ -198,20 +212,13 @@ app.post('/search' , (req, res) => {
   let searched_name = req.body.name;
   let b_found = [];
 
-  console.log(`request body: ${searched_name}`);
-
   Business.findAll()
   .then( business => {
-    console.log(`business after findAll: ${business}`);
-
     for (var i = 0; i < business.length; i++) {
       let name = business[i].name.toLowerCase();
       searched_name.toLowerCase();
-
       if (searched_name === business[i].name) {
-        console.log(`yeeah ${searched_name}, you're in the server!`);
         b_found.push(business[i].name);
-        console.log(`new array with results: ${b_found}`);
       }
     }
     res.render('results', {
@@ -223,38 +230,34 @@ app.post('/search' , (req, res) => {
 // 06: CREATE AN OFFER ---------------------------------------------------------
 
 app.get('/createoffer', (req,res)=>{
-    res.render('createoffer')
+  res.render('createoffer')
 })
 
 app.post('/createoffer', (req, res) => {
-
-    var name = req.body.offer_name;
-    var body = req.body.offer_content;
-    var business = req.session.business;
-    var time = req.body.time_time;
-    var day = req.body.time_day;
-
-    Time.findOne({
-      where: {
-        time: time,
-        day: day,
-      }
-    }).then(timeone => {
-      Offer.create({
-          body: body,
-          time: time,
-          day: day,
-          businessId: business.id,
-          timeId: timeone.id
-      })
+  const {offer_content, time_time, time_day} = req.body;
+  let business = req.session.business;
+  Time.findOne({
+    where: {
+      time: time_time,
+      day: time_day,
+    }
+  })
+  .then(timeone => {
+    Offer.create({
+      body: offer_content,
+      time: time_time,
+      day: time_day,
+      businessId: business.id,
+      timeId: timeone.id
     })
-        .then((offer) => {
-          console.log(offer)
-            res.redirect('/offers')
-        })
-        .catch((err)=>{
-            console.log("ERROR " + err);
-        });
+  })
+  .then((offer) => {
+    console.log(offer)
+      res.redirect('/offers')
+  })
+  .catch((err)=>{
+      console.log("ERROR " + err);
+  });
 })
 
 // BUSINESS CREATE OFFER -------------------------------------------------------
@@ -264,16 +267,16 @@ app.post('/createoffer', (req, res) => {
 // BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
 
 app.get('/offers', (req, res)=>{
-    Offer.findAll({
-      include:[{
-        model: Business
-      },{
-        model: Time
-        }]
-    })
-    .then((alloffers)=>{
-      res.render('offers', {offers: alloffers})
-    })
+  Offer.findAll({
+    include:[{
+      model: Business
+    },{
+      model: Time
+      }]
+  })
+  .then((alloffers)=>{
+    res.render('offers', {offers: alloffers})
+  })
 })
 
 // HOW IT WORKS PAGE ----------------------------------------------------------
@@ -354,5 +357,5 @@ sequelize.sync({force: false})
 .then(() => {
   const server = app.listen(3000, () => {
     console.log('App is running on port 3000');
-  });
-});
+  })
+})

@@ -5,12 +5,13 @@
   "main": "app.donedeal.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.donedeal.js"
+    "start": "nodemon ./views/app.donedeal.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "connect-session-sequelize": "^5.2.2",
     "dotenv": "^6.1.0",
