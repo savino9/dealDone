@@ -325,17 +325,16 @@ The columns will be:
 - Business Id (Foreign Key)
 - Time Id (Foreign Key)
 
-
-|Offer Id (PK)         |  Body                               |  Business Id (FK)      |   Time Id (FK)     |
-|-------------------- :|:-----------------------------------:|:----------------------:|:------------------:|
-|1                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    21              |
-|2                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    45              |
-|3                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    69              |
-|4                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    93              |
-|5                     |  3 Corona for € 10                  |  2                     |    17              |
-|6                     |  3 Corona for € 10                  |  2                     |    21              |
-|7                     |  3 Corona for € 10                  |  2                     |    113             |
-|8                     |  3 Corona for € 10                  |  2                     |    117             |
+|Offer Id (PK) |  Body                          |  Business Id (FK)| Time Id (FK)|
+|------------ :|:------------------------------:|:----------------:|:-----------:|
+|1             |  Buy 1 Get 1 Free on Heineken  |  1               |    21       |
+|2             |  Buy 1 Get 1 Free on Heineken  |  1               |    45       |
+|3             |  Buy 1 Get 1 Free on Heineken  |  1               |    69       |
+|4             |  Buy 1 Get 1 Free on Heineken  |  1               |    93       |
+|5             |  3 Corona for € 10             |  2               |    17       |
+|6             |  3 Corona for € 10             |  2               |    21       |
+|7             |  3 Corona for € 10             |  2               |    113      |
+|8             |  3 Corona for € 10             |  2               |    117      |
 
 
 (PK) = Primary Key
@@ -381,18 +380,18 @@ This page will explain the different subscription options available to businesse
 ### Login
 This page allows a business to login to their account.
 
-## Sign Up
+### Sign Up
 
 This page allows a business to sign up for an account.
 
-## Profile
+### Profile
 
 When a business logs into their account they will be brought to the profile page, and from here they can navigate to creating an offer or view all of their existing offers.
 
-## Create Offer
+### Create Offer
 
 This page allows a business to create an offer where they can give a description of the offer and select a time and day.
 
-## View All Offers (My Offers)
+### View All Offers (My Offers)
 
 This page allows a business to view all of its existing offers.
