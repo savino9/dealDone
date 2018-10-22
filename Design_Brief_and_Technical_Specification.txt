@@ -1,11 +1,8 @@
-    Design Brief / Project Specifications
+Deal Done Application
+Project Specifications
 
-//State the purpose of your application clearly and concisely. Try to do it in
-a single sentence.
-
-//In a block, answer the following questions:
-
-//What is the problem you are trying to solve? - Who is your target audience?
+- What is the problem you are trying to solve? 
+- Who is your target audience?
 - What are your specific goals?
 
 The tourism industry is booming, especially in Amsterdam; according to
@@ -43,7 +40,6 @@ it easily accessible to everyone, free of charge.
 
 This is why you should use Done Deal©
 
-//In another block, answer the following:
 - What is your business model? Where is your revenue coming from?
 
 Our business model will operate under the principle of being completely free
@@ -71,12 +67,12 @@ We will offer two options to businesses, either a monthly subscription for
 The €9.99 subscription and the €99.99 subscription offer the same functionality,
 with the €99.99 offering a saving to the business.
 
-//- What are the costs of your business?
+- What are the costs of your business?
 
 Here is a breakdown of the team that we would need to eventually hire to make
 this business work:
 
-Full Stack Developers
+- **Full Stack Developers**
 - The website will need to be very user friendly and presentable, but it is
 important that all of the information is being stored and processed correctly
 in the back end. If we wish to try new features and ideas in the future then
@@ -84,7 +80,7 @@ these developers will be essential in order to implement them. The developers
 will also be responsible for website maintenance, in order to make sure that
 the site is functional.
 
-Market Research and Sales Reps
+### Market Research and Sales Reps
 - Sales reps will be responsible for going to bars and restaurants for face to
 face meetings with the owners/general managers etc to gauge interest in the
 idea and to offer the product for one month free of charge, and if the business
@@ -92,24 +88,24 @@ likes the idea of the product that we can discuss a subscription with them. We
 would hope that as word spreads of our application that businesses will contact
 us as they want to join the platform.
 
-Advertising
+### Advertising
 - For the launch of the product it will be critical to ensure that customers
 and businesses are made aware of its existence. This can be achieved through
 the use of social media such as Twitter, Facebook, Instagram etc.
 
-Website Accuracy
+### Website Accuracy
 - It is important that all of the information on the website is correct and up
 to date (to avoid potential customer disappointment)
 
-Customer Service
+### Customer Service
 - As the number of website users grow, it is likely that we will receive more
 and more queries and emails. A customer service team will be necessary to
 handle all of this
 
-// Market research:
-//- Who is your current competition?
-//- How is your product different from currently available competitors?
-//- What is the current supply / demand for your product?
+- **Market research:**
+- Who is your current competition?
+- How is your product different from currently available competitors?
+- What is the current supply / demand for your product?
 
 A similar idea was attempted by a company called Bar Doggy, which failed due to
 the company trying to upscale too quickly. See this link for full details:
@@ -219,34 +215,35 @@ Our web application will have a very professional look, and will be highly
 accessible and incredibly user friendly, The website will have the following
 routes:
 
-ROUTE Homepage
+-**ROUTE** 
+### Homepage
 This will be the first page the user sees. There will be a carousel that
 explains the core values of the application and encourages the user to explore
 more and try it out.
 
-ROUTE Drinks Search
+### Drinks Search
 This page will allow users to search for a particular one hour block of time on
 a particular day, and the results will be returned to them.
 
-ROUTE Food Search
+### Food Search
 This page will allow users to search for a particular one hour block of time on
 a particular day, and the results will be returned to them.
 
-ROUTE About Us
+### About Us
 This page will go into more depth to explain who we are, why people should try
 our site and why businesses should subscribe to our site.
 
-ROUTE How It Works
+### How It Works
 This will explain to users how to use the search function.
 
-ROUTE Business Model
+### Business Model
 This page will explain our business model and try to convince businesses to
 give our service a try and if they like it to sign up to a subscription
 
-ROUTE Business Login Page
+### Business Login Page
 This page will allow a business to sign in
 
-ROUTE Add / Update offers
+### Add / Update offers
 After logging in a business can add or update the offers which appear on our
 site.
 
