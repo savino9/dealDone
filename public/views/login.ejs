@@ -1,0 +1,70 @@
+<html>
+
+<head>
+  <%- include partials/head.ejs %>
+
+  <!-- <script type="text/css" src="src/css/signin.css"></script> -->
+  <link rel="stylesheet" href="src/css/signin.css">
+
+</head><!-- /head -->
+
+<body>
+
+  <header>
+
+
+    <%- include partials/header.ejs %>
+  </header><!-- /header -->
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    <label>
+                        Enter the email you signed up with</label>
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    Login to your account</p>
+                <form class="login" id="login" action="/login" method="POST">
+                <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" />
+                <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" minlength="8" placeholder="Password" />
+
+                <input type="submit" value="Login In" class="btn btn-success btn-sm" />
+                <div class="remember-forgot">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" />
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 forgot-pass-content">
+                            <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   <!--  <div class="posted-by">Posted By: <a href="http://www.jquery2dotnet.com">Bhaumik Patel</a></div> -->
+</div>
+
+<footer>
+  <%- include partials/footer.ejs %>
+</footer>
+
+</body>
+</html>
