@@ -93,8 +93,7 @@ Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
 
 // HOME PAGE -------------------------------------------------------------------
 app.get('/', (req, res) => {
-  let business = req.session.business;
-  res.render('home', {business: business})
+  res.render('home')
 })
 
 // LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
@@ -112,13 +111,13 @@ app.post('/login', (req, res) => {
   if(password.length === 0) {
     res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
     return;
-  } 
+  }
   Business.findOne({
 		where: {
 			email: email
 		}
 	})
-  .then((business) => { 
+  .then((business) => {
     if(business !== undefined ) {
       let hash = business.password;
       bcrypt.compare(password, hash,(err, result) => {
@@ -127,7 +126,7 @@ app.post('/login', (req, res) => {
       });
     } else {
       res.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
-    } 
+    }
   })
   .catch((error) => {
     console.error(error);
@@ -199,7 +198,6 @@ app.get('/profile', (req, res)=> {
 
 // SEARCH ----------------------------------------------------------------------
 app.post('/search' , (req, res) => {
-  const {business} = req.session;
   let searched_name = req.body.name;
   let b_found = [];
 
@@ -213,14 +211,13 @@ app.post('/search' , (req, res) => {
       }
     }
     res.render('results', {
-      b_found: b_found,
-      business:business
+      b_found: b_found
     });
   })
 });
 
 // 06: CREATE AN OFFER ---------------------------------------------------------
-app.get('/createoffer', (req,res)=> {
+app.get('/createoffer', (req,res)=>{
   res.render('createoffer')
 })
 
@@ -252,11 +249,8 @@ app.post('/createoffer', (req, res) => {
   });
 })
 
-// BUSINESS UPDATE OFFERS ------------------------------------------------------
-
-// BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
+// DISPLAY ALL OFFERS ----------------------------------------------------------
 app.get('/offers', (req, res)=>{
-  const {business} = req.session;
   Offer.findAll({
     include:[{
       model: Business
@@ -269,16 +263,38 @@ app.get('/offers', (req, res)=>{
   })
 })
 
-// HOW IT WORKS PAGE ----------------------------------------------------------
-app.get('/howitworks', (req, res) => {
-  const {business} = req.session;
-  res.render('howitworks', {business: business})
+// BUSINESS ALL SPECIFIC BUSINESS OFFERS ---------------------------------------
+
+app.get('/myoffers', (req, res)=>{
+  let business = req.session.business;
+  if (business == null) {
+    res.redirect('/home')
+  } else {
+    var businessId = business.id
+    Offer.findAll({
+      where: {
+        businessId: businessId
+      },
+      include:[{
+        model: Business
+      },{
+        model: Time
+        }]
+    })
+    .then((myoffers)=>{
+      res.render('myoffers', {offers: myoffers})
+    })
+}
 })
 
-// DEAL SEARCH PAGE ----------------------------------------------------------
+// HOW IT WORKS PAGE -----------------------------------------------------------
+app.get('/howitworks', (req, res) => {
+  res.render('howitworks')
+})
+
+// DEAL SEARCH PAGE ------------------------------------------------------------
 app.get('/dealsearch', (req, res) => {
-  const {business} = req.session;
-  res.render('dealsearch', {business:business})
+  res.render('dealsearch')
 })
 
 app.post('/dealsearch', (req, res) => {
@@ -308,17 +324,15 @@ app.post('/dealsearch', (req, res) => {
 
 // DISPLAY ALL OFFERS ----------------------------------------------------------
 app.get('/dealresult', (req, res)=>{
-  const {business} = req.session;
   Offer.findAll({include: [{model: Business}, {model: Time}]})
   .then(offers=>{
-    res.render('dealresult', {offers: offers, business:business})
+    res.render('dealresult', {offers: offers})
   })
 })
 
 // ABOUT US --------------------------------------------------------------------
  app.get('/aboutus', (req, res) => {
-  const {business} = req.session;
-  res.render('aboutus', {business:business})
+  res.render('aboutus')
 })
 
 // CONTACT ---------------------------------------------------------------------
@@ -328,11 +342,10 @@ app.get('/contact', (req, res) => {
 
 // BUSINESS MODEL --------------------------------------------------------------
 app.get('/businessmodel', (req, res) => {
-  const {business} = req.session;
-  res.render('businessmodel', {business:business})
+  res.render('businessmodel')
 })
 
-// START SERVER AND SEQUELIZE ------------------------------------------------------
+// START SERVER AND SEQUELIZE --------------------------------------------------
 sequelize.sync({force: false})
 .then(() => {
   const server = app.listen(3000, () => {

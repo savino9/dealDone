@@ -6,11 +6,7 @@
 <body>
 
 	<header>
-    <% if (business !== undefined) { %>
-      <%- include partials/profile-header.ejs %>
-    <% } else { %>
-      <%- include partials/header.ejs %>
-    <% } %>
+		<%- include partials/header.ejs %>
 	</header>
 
 	<div class="bgdrinks">
@@ -23,7 +19,7 @@
       <div class="card-deck">
         <div class="card">
           <div class="card-footer">
-						<a href="/offers"><button class="btn btn-hero btn-lg" role="button">All My Offers</button></a>
+						<a href="/myoffers"><button class="btn btn-hero btn-lg" role="button">All My Offers</button></a>
             <small class="text-muted"></small>
           </div>
         </div>
@@ -40,10 +36,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <footer>
+</div>
+	<footer>
 		<%- include partials/footer.ejs %>
 	</footer>
 

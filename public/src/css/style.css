@@ -96,7 +96,8 @@ table table-hover {
 
 .bgdrinks {
   background-image: url("/src/img/Background_1.jpg");
-  min-height: 100%;
+  filter:brightness(100%);
+  min-height: 625px;
   width: 100%;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -110,7 +111,7 @@ table table-hover {
   background-image: url("../img/bottles.jpg");
 
   /* Set a specific height */
-  min-height: 600px;
+  height: 500px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -222,7 +223,7 @@ table table-hover {
   padding:14px;
 }
 
-#login-dp .social-buttons { 
+#login-dp .social-buttons {
   margin:12px;
 }
 
@@ -255,7 +256,7 @@ table table-hover {
 }
 
 .navbar {
-  margin-bottom: -3px; 
+  margin-bottom: -3px;
   color: #e8e9ea;
   border: 15px solid black;
   box-shadow: 3px -63px 55px 37px;
@@ -545,4 +546,13 @@ Fade content bs-carousel with hero headers
 .footer-bottom p {
   font-size:15px;
   color: #FFF;
+}
+
+.table-dark {
+    color: orange;
+    background-color: #212529;
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color:  rgba(0, 0, 0, 0.8)
 }

@@ -7,21 +7,17 @@
 <body>
 
 <header>
-  <% if (business !== undefined) { %>
-    <%- include partials/profile-header.ejs %>
-  <% } else { %>
-    <%- include partials/header.ejs %>
-  <% } %>
+  <%- include partials/header.ejs %>
 </header>
 
   <div class="bgdrinks">
     <div class="texttitle">
       <strong>WHEN WOULD YOU<br>LIKE TO GO OUT?</strong>
     </div>
-    
     <form id="dealsearch" action="/dealsearch" method="POST" autocomplete="off">
-      <div class="btn-group btn-group-justified">
-        <div class="btn-group">
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            
           <label class="form-label" for="date">
             <span class="form-select">
               <select name="time_day" id="time_day">
@@ -68,12 +64,12 @@
               </select>
             </span>
           </label>
-          
+            
           <div class="form-group">
             <input type="submit" value="Submit">
           </div>
+          </div>
         </div>
-      </div>
     </form>
   </div>
 

@@ -11,8 +11,12 @@
   </header><!-- /header -->
 
   <div class="bgdrinks">
-    <table class="table table-dark">
 
+    <div class="texttitle">
+      <strong>All your offers </strong>
+    </div>
+
+    <table class="table table-dark">
       <thead>
         <tr>
           <!-- <th>#</th> -->
@@ -25,7 +29,7 @@
       </thead>
 
       <tbody>
-        <tr scope="row">
+        <tr>
           <% for(let i= 0; i< offers.length; i++) { %>
           <!-- <td>1</td> -->
           <td>
@@ -38,22 +42,24 @@
             <%= offers[i].body %>
           </td>
           <td>
-            <%= offers[i].time.day %>
+            <%= offers[i].time.time %>
           </td>
           <td>
-            <%= offers[i].time.time %>
+            <%= offers[i].time.day %>
           </td>
         </tr>
         <% } %>
       </tbody>
     </table>
 
-  </div>
+    <br>
+    <br>
 
-  <footer>
-    <%- include partials/footer.ejs %>
-  </footer>
+</div>
 
+    <footer>
+      <%- include partials/footer.ejs %>
+    </footer>
 </body>
 
 </html>
