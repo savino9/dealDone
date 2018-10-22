@@ -78,7 +78,7 @@ const Time = sequelize.define('time', {
   },
   day: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
 }, {
    timestamps: false
@@ -277,10 +277,11 @@ app.get('/dealsearch', (req, res) => {
 
 app.post('/dealsearch', (req, res) => {
   const {time_day, time_time} = req.body;
+  console.log(time_day);
   Time.findOne({
     where: {
-      day: day,
-      time: time
+      day: time_day,
+      time: time_time
     }
   })
   .then(time => {
@@ -292,11 +293,7 @@ app.post('/dealsearch', (req, res) => {
     })
   })
   .then((offers)=>{
-    if (day === null && time === null){
-      res.redirect('dealresultnomatch');
-    } else {
-      res.render('dealresult', {offers: offers})
-    }
+    res.render('dealresult', {offers: offers})
   })
   .catch((err)=>{
     console.error(err);
@@ -327,7 +324,7 @@ app.get('/businessmodel', (req, res) => {
 })
 
 // START SERVER AND SEQUELIZE ------------------------------------------------------
-sequelize.sync({force: false})
+sequelize.sync({force: true})
 .then(() => {
   const server = app.listen(3000, () => {
     console.log('App is running on port 3000');

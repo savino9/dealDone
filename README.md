@@ -1,4 +1,4 @@
-# Deal Done Application
+# Done Deal Application
 ## Project Specifications
 
 - What is the problem you are trying to solve? 
@@ -70,7 +70,7 @@ with the €99.99 offering a saving to the business.
 Here is a breakdown of the team that we would need to eventually hire to make
 this business work:
 
-- **Full Stack Developers**
+- **Full Stack Developers** 
 
 - The website will need to be very user friendly and presentable, but it is
 important that all of the information is being stored and processed correctly
@@ -137,13 +137,11 @@ Business Id (each business will be assigned a unique Id with a serial primary ke
 Name
 Address
 
---------------------------------------------------------------------------------
-Business Id (PK)      |   Name                 |    Address
-integer               |   string               |    string
---------------------------------------------------------------------------------
-1                     |   Old Sailor           |    Oudezijds Achterburgwal 39-A, 1012 DA
-2                     |   Hanneke's Boom       |    Dijksgracht 4, 1019 BS Amsterdam
-3                     |   de Prael             |    Oudezijds Voorburgwal 30, 1012 GD
+| BusinessId |        Name       |          Address         |
+|------------|:-----------------:|-------------------------:|
+|     1    	 |      Old Sailor   |  Oudezijds Achterburgwal |
+|     2    	 |    Hanneke's Boom |              Dijksgracht |
+|     3    	 |          de Prael |    Oudezijds Voorburgwal |
 
      Table 'Time'
 
@@ -154,26 +152,11 @@ The columns will be
 Time Id (each time will be assigned a unique Id with a serial primary key)
 Time (the one hour block of time)
 
---------------------------------------------------------------------------------
-Time Id (PK)          |  Time                  |    Day of the Week
-integer               |  string                |    string
---------------------------------------------------------------------------------
-1                     |  16:00 - 17:00         |    Monday
-2                     |  17:00 - 18:00         |    Monday
-3                     |  18:00 - 19:00         |    Monday
-4                     |  19:00 - 20:00         |    Monday
-5                     |  20:00 - 21:00         |    Monday
-6                     |  21:00 - 22:00         |    Monday
-7                     |  22:00 - 23:00         |    Monday
-8                     |  23:00 - 00:00         |    Monday
-9                     |  16:00 - 17:00         |    Tuesday
-10                    |  17:00 - 18:00         |    Tuesday
-11                    |  18:00 - 19:00         |    Tuesday
-12                    |  19:00 - 20:00         |    Tuesday
-13                    |  20:00 - 21:00         |    Tuesday
-14                    |  21:00 - 22:00         |    Tuesday
-15                    |  22:00 - 23:00         |    Tuesday
-16                    |  23:00 - 00:00         |    Tuesday
+|   TimeId   |        Name       |          Address         |
+|------------|:-----------------:|-------------------------:|
+|     1    	 |   16:00 - 17:00   |                 Monday   |
+|     2    	 |   17:00 - 18:00   |                 Monday   |
+|     3    	 |   19:00 - 20:00   |                 Monday   |
 
      Table 'Offer'
 
@@ -189,19 +172,13 @@ Offer Details
 Business Id
 Time Id
 
---------------------------------------------------------------------------------
-Offer Id (PK)         |  Offer Details                      |  Business Id (FK)      |   Time Id (FK)
-integer               |  string                             |  integer               |   integer
---------------------------------------------------------------------------------
-1                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    1
-2                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    5
-3                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    9
-4                     |  Buy 1 Get 1 Free on Heineken       |  1                     |    13
-5                     |  3 Corona for € 10                  |  2                     |    4
-6                     |  3 Corona for € 10                  |  2                     |    5
-7                     |  3 Corona for € 10                  |  2                     |    8
-8                     |  3 Corona for € 10                  |  2                     |    9
---------------------------------------------------------------------------------
+|   OfferId  |             Offer Details       |   BusinessId    |
+|------------|:-------------------------------:|----------------:|
+|     1    	 |    Buy 1 Get 1 Free on Heineken |  							 |
+|     2    	 |    Buy 1 Get 1 Free on Heineken |  							 |
+|     3   	 |    Buy 1 Get 1 Free on Heineken |  							 |
+        
+
 (PK) = Primary Key
 (FK) = Foreign Key
 
