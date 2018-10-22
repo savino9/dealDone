@@ -96,8 +96,7 @@ table table-hover {
 
 .bgdrinks {
   background-image: url("/src/img/Background_1.jpg");
-  filter:brightness(100%);
-  min-height: 625px;
+  min-height: 100%;
   width: 100%;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -111,7 +110,7 @@ table table-hover {
   background-image: url("../img/bottles.jpg");
 
   /* Set a specific height */
-  height: 500px;
+  min-height: 600px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;

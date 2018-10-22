@@ -93,7 +93,8 @@ Offer.belongsTo(Time, { foreignKey: { allowNull: false } });
 
 // HOME PAGE -------------------------------------------------------------------
 app.get('/', (req, res) => {
-  res.render('home')
+  let business = req.session.business;
+  res.render('home', {business: business})
 })
 
 // LOGIN AND CHECKING FOR MATCHING USER INPUT DATA------------------------------
@@ -198,6 +199,7 @@ app.get('/profile', (req, res)=> {
 
 // SEARCH ----------------------------------------------------------------------
 app.post('/search' , (req, res) => {
+  const {business} = req.session;
   let searched_name = req.body.name;
   let b_found = [];
 
@@ -211,13 +213,14 @@ app.post('/search' , (req, res) => {
       }
     }
     res.render('results', {
-      b_found: b_found
+      b_found: b_found,
+      business:business
     });
   })
 });
 
 // 06: CREATE AN OFFER ---------------------------------------------------------
-app.get('/createoffer', (req,res)=>{
+app.get('/createoffer', (req,res)=> {
   res.render('createoffer')
 })
 
@@ -253,6 +256,7 @@ app.post('/createoffer', (req, res) => {
 
 // BUSINESS DISPLAY ALL OFFERS -------------------------------------------------
 app.get('/offers', (req, res)=>{
+  const {business} = req.session;
   Offer.findAll({
     include:[{
       model: Business
@@ -267,12 +271,14 @@ app.get('/offers', (req, res)=>{
 
 // HOW IT WORKS PAGE ----------------------------------------------------------
 app.get('/howitworks', (req, res) => {
-  res.render('howitworks')
+  const {business} = req.session;
+  res.render('howitworks', {business: business})
 })
 
 // DEAL SEARCH PAGE ----------------------------------------------------------
 app.get('/dealsearch', (req, res) => {
-  res.render('dealsearch')
+  const {business} = req.session;
+  res.render('dealsearch', {business:business})
 })
 
 app.post('/dealsearch', (req, res) => {
@@ -302,15 +308,17 @@ app.post('/dealsearch', (req, res) => {
 
 // DISPLAY ALL OFFERS ----------------------------------------------------------
 app.get('/dealresult', (req, res)=>{
+  const {business} = req.session;
   Offer.findAll({include: [{model: Business}, {model: Time}]})
   .then(offers=>{
-    res.render('dealresult', {offers: offers})
+    res.render('dealresult', {offers: offers, business:business})
   })
 })
 
 // ABOUT US --------------------------------------------------------------------
  app.get('/aboutus', (req, res) => {
-  res.render('aboutus')
+  const {business} = req.session;
+  res.render('aboutus', {business:business})
 })
 
 // CONTACT ---------------------------------------------------------------------
@@ -320,11 +328,12 @@ app.get('/contact', (req, res) => {
 
 // BUSINESS MODEL --------------------------------------------------------------
 app.get('/businessmodel', (req, res) => {
-  res.render('businessmodel')
+  const {business} = req.session;
+  res.render('businessmodel', {business:business})
 })
 
 // START SERVER AND SEQUELIZE ------------------------------------------------------
-sequelize.sync({force: true})
+sequelize.sync({force: false})
 .then(() => {
   const server = app.listen(3000, () => {
     console.log('App is running on port 3000');

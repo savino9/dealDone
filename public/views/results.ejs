@@ -7,8 +7,12 @@
 <body>
 
   <header>
-    <%- include partials/header.ejs %>
-  </header><!-- /header -->
+    <% if (business !== undefined) { %>
+      <%- include partials/profile-header.ejs %>
+    <% } else { %>
+      <%- include partials/header.ejs %>
+    <% } %>
+  </header>
 
   <main>
     <div style="min-height: 200px; padding: 20px;">

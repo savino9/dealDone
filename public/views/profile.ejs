@@ -6,7 +6,11 @@
 <body>
 
 	<header>
-		<%- include partials/header.ejs %>
+    <% if (business !== undefined) { %>
+      <%- include partials/profile-header.ejs %>
+    <% } else { %>
+      <%- include partials/header.ejs %>
+    <% } %>
 	</header>
 
 	<div class="bgdrinks">
@@ -37,14 +41,9 @@
         </div>
       </div>
     </div>
-    
-    <h4><a href="/offers" target="_blank">Show All My Offers</a></h4>
-    <h4><a href="/createoffer" target="_blank">Create Offers</a></h4>
-    <h4><a href="/logout" target="_blank">Logout</a></h4>
   </div>
 
-</div>
-	<footer>
+  <footer>
 		<%- include partials/footer.ejs %>
 	</footer>
 
