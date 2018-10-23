@@ -265,7 +265,7 @@ app.get('/offers', (req, res)=>{
       }]
   })
   .then((alloffers)=>{
-    res.render('offers', {offers: alloffers})
+    res.render('offers', {offers: alloffers, business:business})
   })
 })
 
@@ -282,6 +282,7 @@ app.get('/dealsearch', (req, res) => {
 })
 
 app.post('/dealsearch', (req, res) => {
+  const {business} = req.session;
   const {time_day, time_time} = req.body;
   console.log(time_day);
   Time.findOne({
@@ -299,7 +300,7 @@ app.post('/dealsearch', (req, res) => {
     })
   })
   .then((offers)=>{
-    res.render('dealresult', {offers: offers})
+    res.render('dealresult', {offers: offers, business:business})
   })
   .catch((err)=>{
     console.error(err);

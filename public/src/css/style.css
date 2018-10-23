@@ -96,7 +96,7 @@ table table-hover {
 
 .bgdrinks {
   background-image: url("/src/img/Background_1.jpg");
-  min-height: 100%;
+  height: 100%;
   width: 100%;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -261,34 +261,6 @@ table table-hover {
   box-shadow: 3px -63px 55px 37px;
 }
 
-/* --! new stuf */
-
-/*
-Fade content bs-carousel with hero headers
-*/
-
-/********************************/
-/*       Fade Bs-carousel       */
-/********************************/
-.fade-carousel {
-    position: relative;
-    height: 100vh;
-}
-.fade-carousel .carousel-inner .item {
-    height: 100vh;
-}
-.fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
-    background-color: #f39c12;
-    border-color: #f39c12;
-    opacity: .7;
-}
-.fade-carousel .carousel-indicators > li.active {
-  width: 10px;
-  height: 10px;
-  opacity: 1;
-}
-
 /*===========VIDEO=========*/
 #video {
   width: 100%;
@@ -389,28 +361,6 @@ Fade content bs-carousel with hero headers
   background-image: url(https://images.unsplash.com/photo-1438557068880-c5f474830377?ixlib=rb-);
 }
 
-/********************************/
-/*          Media Queries       */
-/********************************/
-@media(max-width:768px) {
-  #login-dp{
-      background-color: inherit;
-      color: #fff;
-  }
-  #login-dp .bottom{
-      background-color: inherit;
-      border-top:0 none;
-  }
-}
-
-@media screen and (min-width: 980px) {
-  .hero { width: 980px; }
-}
-
-@media screen and (max-width: 640px) {
-  .hero h1 { font-size: 4em; }
-}
-
 .how-section1 {
   margin-top:-15%;
   padding: 10%;
@@ -495,8 +445,7 @@ Fade content bs-carousel with hero headers
   margin-bottom: 0;
 }
 
-/* footer!!!!!!!! */
-/* Footer */
+/*=====FOOTER=======*/
 
 .footer {
   padding:15px 0px;
@@ -545,4 +494,30 @@ Fade content bs-carousel with hero headers
 .footer-bottom p {
   font-size:15px;
   color: #FFF;
+}
+
+.social-icon a {
+  color: white;
+}
+
+/********************************/
+/*          Media Queries       */
+/********************************/
+@media(max-width:768px) {
+  #login-dp{
+      background-color: inherit;
+      color: #fff;
+  }
+  #login-dp .bottom{
+      background-color: inherit;
+      border-top:0 none;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .hero { width: 980px; }
+}
+
+@media screen and (max-width: 640px) {
+  .hero h1 { font-size: 4em; }
 }
