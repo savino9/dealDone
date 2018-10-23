@@ -222,7 +222,7 @@ table table-hover {
   padding:14px;
 }
 
-#login-dp .social-buttons { 
+#login-dp .social-buttons {
   margin:12px;
 }
 
@@ -255,7 +255,7 @@ table table-hover {
 }
 
 .navbar {
-  margin-bottom: -3px; 
+  margin-bottom: -3px;
   color: #e8e9ea;
   border: 15px solid black;
   box-shadow: 3px -63px 55px 37px;
@@ -521,3 +521,13 @@ table table-hover {
 @media screen and (max-width: 640px) {
   .hero h1 { font-size: 4em; }
 }
+
+.table-dark {
+    color: orange;
+    background-color: #212529;
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color:  rgba(0, 0, 0, 0.8)
+}
+

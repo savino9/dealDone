@@ -112,13 +112,13 @@ app.post('/login', (req, res) => {
   if(password.length === 0) {
     res.redirect('/?message=' + encodeURIComponent("Please fill in your password."));
     return;
-  } 
+  }
   Business.findOne({
 		where: {
 			email: email
 		}
 	})
-  .then((business) => { 
+  .then((business) => {
     if(business !== undefined ) {
       let hash = business.password;
       bcrypt.compare(password, hash,(err, result) => {
@@ -127,7 +127,7 @@ app.post('/login', (req, res) => {
       });
     } else {
       res.redirect('/?message=' + encodeURIComponent("Invalid email or password."));
-    } 
+    }
   })
   .catch((error) => {
     console.error(error);
@@ -269,6 +269,30 @@ app.get('/offers', (req, res)=>{
   })
 })
 
+// BUSINESS ALL SPECIFIC BUSINESS OFFERS ---------------------------------------
+
+app.get('/myoffers', (req, res)=>{
+  let business = req.session.business;
+  if (business == null) {
+    res.redirect('/home')
+  } else {
+    var businessId = business.id
+    Offer.findAll({
+      where: {
+        businessId: businessId
+      },
+      include:[{
+        model: Business
+      },{
+        model: Time
+        }]
+    })
+    .then((myoffers)=>{
+      res.render('myoffers', {offers: myoffers})
+    })
+}
+})
+
 // HOW IT WORKS PAGE ----------------------------------------------------------
 app.get('/howitworks', (req, res) => {
   const {business} = req.session;
@@ -312,7 +336,7 @@ app.get('/dealresult', (req, res)=>{
   const {business} = req.session;
   Offer.findAll({include: [{model: Business}, {model: Time}]})
   .then(offers=>{
-    res.render('dealresult', {offers: offers, business:business})
+    res.render('dealresult', {offers: offers, business: business})
   })
 })
 
