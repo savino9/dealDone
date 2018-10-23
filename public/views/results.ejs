@@ -15,13 +15,49 @@
   </header>
 
   <main>
-    <div style="min-height: 200px; padding: 20px;">
-      <% if (b_found.length > 0) { %>
-        User details:
-        <li>Name: <%= b_found[0] %> </li>
-      <% } else { %>
-        <li>Sorry user not found!</li>
-      <% } %>
+    <div class="bgdrinks">
+      <div class="container">
+        <div class="table-dark" style="padding: 20px; list-style: none;">
+          <% if (b_found.length > 0) { %>
+            <h2>Business details</h2>
+            <br>
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th>Business Name</th>
+                    <th>Business Address</th>
+                    <th>Offer</th>
+                    <th>Time</th>
+                    <th>Day</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <% for(let i= 0; i< offer.length; i++) { %>
+                    <td>
+                      <%= business.name %>
+                    </td>
+                    <td>
+                      <%= business.address %>
+                    </td>
+                    <td>
+                      <%= offer[i].body %>
+                    </td>
+                    <td>
+                      <%= offer[i].time.time %>
+                    </td>
+                    <td>
+                      <%= offer[i].time.day %>
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+          <% } else { %>
+            <li>Sorry user not found!</li>
+          <% } %>
+        </div>
+      </div>
     </div>
   </main>
 

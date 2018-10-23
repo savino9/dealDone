@@ -205,17 +205,31 @@ app.post('/search' , (req, res) => {
 
   Business.findAll()
   .then( business => {
-    for (var i = 0; i < business.length; i++) {
-      let name = business[i].name.toLowerCase();
-      searched_name.toLowerCase();
-      if (searched_name === business[i].name) {
-        b_found.push(business[i].name);
+    for (let i = 0; i < business.length; i++) {
+      if (searched_name.toLowerCase() == business[i].name.toLowerCase()) {
+        b_found.push(business[i]);
       }
     }
+  })
+  .then(() => {
+    Offer.findAll({
+      where: {
+        businessId: business.id
+      },
+      include: [{model: Time}]
+    })
+    .then(offer => {
+    
+    console.log(offer[0].dataValues.body);
+    console.log(offer[0].dataValues.timeId);
+
+
     res.render('results', {
       b_found: b_found,
-      business:business
+      business:business,
+      offer:offer
     });
+    })
   })
 });
 

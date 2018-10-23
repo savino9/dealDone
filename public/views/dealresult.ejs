@@ -1,5 +1,4 @@
 <html>
-
 <head>
   <%- include partials/head.ejs %>
 </head><!-- /head -->
@@ -15,49 +14,46 @@
   </header>
 
   <div class="bgdrinks">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <!-- <th>#</th> -->
+          <th scope="col">Business Name</th>
+          <th scope="col">Business Address</th>
+          <th scope="col">Offer</th>
+          <th scope="col">Time</th>
+          <th scope="col">Day</th>
+        </tr>
+      </thead>
 
-      <table class="table table-dark">
+      <tbody>
+        <tr scope="row">
+          <% for(let i= 0; i< offers.length; i++) { %>
+          <!-- <td>1</td> -->
+          <td>
+            <%= offers[i].business.name %>
+          </td>
+          <td>
+            <%= offers[i].business.address %>
+          </td>
+          <td>
+            <%= offers[i].body %>
+          </td>
+          <td>
+            <%= offers[i].time.day %>
+          </td>
+          <td>
+            <%= offers[i].time.time %>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
 
-        <thead>
-          <tr>
-            <!-- <th>#</th> -->
-            <th scope="col">Business Name</th>
-            <th scope="col">Business Address</th>
-            <th scope="col">Offer</th>
-            <th scope="col">Time</th>
-            <th scope="col">Day</th>
-          </tr>
-        </thead>
+<footer>
+  <%- include partials/footer.ejs %>
+</footer>
 
-        <tbody>
-          <tr scope="row">
-            <% for(let i= 0; i< offers.length; i++) { %>
-            <!-- <td>1</td> -->
-            <td>
-              <%= offers[i].business.name %>
-            </td>
-            <td>
-              <%= offers[i].business.address %>
-            </td>
-            <td>
-              <%= offers[i].body %>
-            </td>
-            <td>
-              <%= offers[i].time.day %>
-            </td>
-            <td>
-              <%= offers[i].time.time %>
-            </td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
-
-    </div>
-
-    <footer>
-      <%- include partials/footer.ejs %>
-    </footer>
-    </body>
-
-    </html>
+</body>
+</html>

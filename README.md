@@ -1,9 +1,9 @@
 # **DONE DEAL** Application
 ## Project Specifications
 
-_- What is the problem you are trying to solve?_
-_- Who is your target audience?_
-_- What are your specific goals?
+__- What is the problem you are trying to solve?__
+__- Who is your target audience?__
+__- What are your specific goals?__
 
 The tourism industry is booming, especially in Amsterdam; according to
 (https://amsterdam.org/en/facts-and-figures.php) there are 5340000 tourists every year, which on average works out to around 14630 people every day.
@@ -34,7 +34,7 @@ information on happy hours, special offers and discounts at certain times on
 certain dates. Our web application seeks to compile that information and make
 it easily accessible to everyone, free of charge.
 
-_What is your business model? Where is your revenue coming from?_
+__What is your business model? Where is your revenue coming from?__
 
 Our business model will operate under the principle of being completely free
 for people to use the search functionality. Anyone can go onto the website and
@@ -60,7 +60,7 @@ We will offer two options to businesses, either a monthly subscription for
 
 The €9.99 subscription and the €99.99 subscription offer the same functionality, with the €99.99 offering a saving to the business.
 
-_What are the costs of your business?_
+__What are the costs of your business?__
 
 Here is a breakdown of the team that we would need to eventually hire to make
 this business work:
@@ -96,9 +96,9 @@ handle all of this.
 
 #### Market research:
 
-_- Who is your current competition?_
-_- How is your product different from currently available competitors?_
-_- What is the current supply / demand for your product?_
+__- Who is your current competition?__
+__- How is your product different from currently available competitors?__
+__- What is the current supply / demand for your product?__
 
 A similar idea was attempted by a company called Bar Doggy, which failed due to
 the company trying to upscale too quickly. See this link for full details:
@@ -114,8 +114,8 @@ of users and businesses, and after conducting more thorough market research, we
 can try to better determine the demand for the product.
 
 ## Technical Specifications:
-_What data will you need to store? How will it be organized? Describe each
-table, its columns, and its relationships with other tables._
+__What data will you need to store? How will it be organized? Describe each
+table, its columns, and its relationships with other tables.__
 
      Table 'Business'
 
@@ -326,7 +326,7 @@ The columns will be:
 - Time Id (Foreign Key)
 
 |Offer Id (PK) |  Body                          |  Business Id (FK)| Time Id (FK)|
-|------------ :|:------------------------------:|:----------------:|:-----------:|
+|-------------:|:------------------------------:|:----------------:|:-----------:|
 |1             |  Buy 1 Get 1 Free on Heineken  |  1               |    21       |
 |2             |  Buy 1 Get 1 Free on Heineken  |  1               |    45       |
 |3             |  Buy 1 Get 1 Free on Heineken  |  1               |    69       |
@@ -345,7 +345,7 @@ In the above example, if a customer searches for 20:00 - 21:00 on a Monday  (whi
 - Buy 1 Get 1 Free on Heineken at the Old Sailor (Business Id 1)
 - 3 Corona for € 10 at Hanneke's Boom (Business ID 2)
 
-_**What does your product look like? List each view, their purpose, and how they work._
+**What does your product look like? List each view, their purpose, and how they work**
 
 When a user searches they will be given a list of matches for their search criteria. The actual information on each bar or restaurant will include the NAME, ADDRESS, and the OFFER (and also a reminder of the time and day that they searched for).
 
@@ -395,3 +395,63 @@ This page allows a business to create an offer where they can give a description
 ### View All Offers (My Offers)
 
 This page allows a business to view all of its existing offers.
+
+## Milestones, Timeline and Working Together
+
+- Group will meet up once per day during the project to discuss progress, ideas and delegation of tasks. Group will also keep in regular contact through Slack group and will share information through Dropbox
+
+#### Tuesday 9th
+
+- Initial Group Meeting
+- Discussing different ideas and deciding on an application that allows users to search for food and drinks offers based on the time and day of the week
+
+#### Wednesday 10th
+
+- Agree on the name **DONE DEAL**
+- Decide on important technical questions such as the routing, render engine etc.
+
+#### Thursday 11th
+
+- Sketching wireframes and making initial ideas for the design and layout
+
+#### Friday 12th
+
+- Initial routing established
+- Initial site layout and design established
+- Functionality added for a business to create an account and login
+
+#### Monday 15th
+
+- Begin writing the Design Brief & Technical Specification
+
+#### Tuesday 16th
+
+- Establishing our table relationships
+- Improved styling
+- Added partials for header and footer
+
+#### Wednesday 17th
+
+- Functional search bar implemented
+
+#### Thursday 18th
+
+- Functionality added so that businesses can create offers
+
+#### Friday 19th
+
+- Functionality added so that users can search for offers according to a specific time and day
+
+#### Monday 22nd
+
+- Cleaning up code and removing unnecessary routes and files.
+- Tables displaying offers are now professionally styled
+
+#### Tuesday 23rd
+
+- Fixing final bugs and errors
+- Making a plan for final presentation
+
+#### Wednesday 24th
+
+- Final group presentation
