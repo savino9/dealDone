@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
+const PORT = process.env.PORT || 5000
 
 require('dotenv').config();
 
@@ -16,7 +17,7 @@ app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
 // DATABASE ---------------------------------------------------------
-const sequelize = new Sequelize('da3p6i138hnjv5', 'wnhfuszvguwfci', '1bec6608f6d56e1a3f42b44680eb5f38728ede022d77ea8a29f57e494433076d', {
+const sequelize = new Sequelize(process.env.DATABASE_URL {
   host: 'localhost',
   dialect: 'postgres'
 });
@@ -373,7 +374,7 @@ app.get('/businessmodel', (req, res) => {
 // START SERVER AND SEQUELIZE ------------------------------------------------------
 sequelize.sync({force: false})
 .then(() => {
-  const server = app.listen(5432, () => {
-    console.log('App is running on port 5432');
+  const server = app.listen(PORT, () => {
+    console.log('App is running on port '+ PORT);
   })
 })
