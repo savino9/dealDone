@@ -16,7 +16,7 @@ app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
 // DATABASE ---------------------------------------------------------
-const sequelize = new Sequelize('donedeal', process.env.POSTGRES_USER, process.env.POSTGRES_USER, {
+const sequelize = new Sequelize('da3p6i138hnjv5', 'wnhfuszvguwfci', '1bec6608f6d56e1a3f42b44680eb5f38728ede022d77ea8a29f57e494433076d', {
   host: 'localhost',
   dialect: 'postgres'
 });
@@ -219,11 +219,6 @@ app.post('/search' , (req, res) => {
       include: [{model: Time}]
     })
     .then(offer => {
-    
-    console.log(offer[0].dataValues.body);
-    console.log(offer[0].dataValues.timeId);
-
-
     res.render('results', {
       b_found: b_found,
       business:business,
@@ -322,7 +317,6 @@ app.get('/dealsearch', (req, res) => {
 app.post('/dealsearch', (req, res) => {
   const {business} = req.session;
   const {time_day, time_time} = req.body;
-  console.log(time_day);
   Time.findOne({
     where: {
       day: time_day,
@@ -379,7 +373,7 @@ app.get('/businessmodel', (req, res) => {
 // START SERVER AND SEQUELIZE ------------------------------------------------------
 sequelize.sync({force: false})
 .then(() => {
-  const server = app.listen(3000, () => {
-    console.log('App is running on port 3000');
+  const server = app.listen(5432, () => {
+    console.log('App is running on port 5432');
   })
 })
