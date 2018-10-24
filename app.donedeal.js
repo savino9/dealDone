@@ -4,7 +4,7 @@ const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
