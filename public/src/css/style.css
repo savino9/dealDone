@@ -95,12 +95,12 @@ table table-hover {
 /*===================*/
 
 .bgdrinks {
-  background-image: url("/src/img/Background_1.jpg");
-  height: 100%;
+  background-image: url(/src/img/Background_1.jpg);
   width: 100%;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
+  padding-top: 5%;
 }
 
 /*=======PARALLAX=======*/
@@ -155,9 +155,6 @@ table table-hover {
   background-color:  rgba(0, 0, 0, 0.6);
   font-family: Arial;
   font-size: 36px;
-  width: 40%;
-  margin-right: 30%;
-  margin-left: 30%;
 }
 
 .column_1 {
@@ -255,9 +252,7 @@ table table-hover {
 }
 
 .navbar {
-  margin-bottom: -3px;
   color: #e8e9ea;
-  border: 15px solid black;
   box-shadow: 3px -63px 55px 37px;
 }
 
@@ -529,5 +524,98 @@ table table-hover {
     margin-right: 5%;
     margin-left: 5%;
     background-color:  rgba(0, 0, 0, 0.8)
+}
+
+.how-section1 {
+ margin-top:-15%;
+ padding: 10%;
+}
+
+.how-section1 h4 {
+ color: #ffa500;
+ font-weight: bold;
+ font-size: 30px;
+}
+
+.how-section1 .subheading {
+ color: #3931af;
+ font-size: 20px;
+}
+
+.how-section1 .row {
+ margin-top: 10%;
+}
+
+.how-img {
+ text-align: center;
+}
+
+.how-img img {
+ width: 40%;
+}
+
+.mb-60 {
+ margin-bottom: 60px;
+}
+
+.services-inner {
+ border: 2px solid #000000;
+ margin-left: 35px;
+ background-color: rgba(0, 0, 0, 0.5);
+ transition: .3s;
+}
+
+.our-services-img {
+ text-align: center;
+}
+
+.our-services-text {
+ text-align: center;
+ padding-right: 10px;
+}
+
+.our-services-text {
+ text-family: Helvetica;
+ text-align: center;
+ padding: 28px 0 28px;
+}
+
+.our-services-text h4 {
+ color: white;
+ font-size: 18px;
+ font-weight: 700;
+ letter-spacing: 1px;
+ margin-bottom: 16px;
+ padding-bottom: 10px;
+ position: relative;
+ text-transform: uppercase;
+}
+
+.our-services-text h4::before {
+ background: orange none repeat scroll 0 0;
+ bottom: 0;
+ content: "";
+ height: 1px;
+ position: absolute;
+ width: 35px;
+}
+
+.our-services-wrapper:hover .services-inner {
+ background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
+ border: 2px solid transparent;
+ box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.our-services-text p {
+ color: white;
+ margin-bottom: 0;
+}
+
+.our-services-img img {
+  filter: invert(100%);
+}
+
+.dealsearch {
+  min-height: 600px;
 }
 

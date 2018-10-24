@@ -1,80 +1,74 @@
 <html>
 
 <head>
-  <%- include partials/head.ejs %>
+ <%- include partials/head.ejs %>
 </head><!-- /head -->
 
 <body>
 
-  <header>
-    <% if (business !== undefined) { %>
-      <%- include partials/profile-header.ejs %>
-    <% } else { %>
-      <%- include partials/header.ejs %>
-    <% } %>
-  </header>
+ <header>
+   <% if (business !== undefined) { %>
+     <%- include partials/profile-header.ejs %>
+   <% } else { %>
+     <%- include partials/header.ejs %>
+   <% } %>
+ </header>
 
-  <div>
-    <video autoplay muted loop id="video">
-      <source src="src/img/bar.mp4" type="video/mp4">
-    </video>
-    <div class="hero video-title">
-      <hgroup>
-        <h1><span class="bold orange">Done</span>Deal</h1>
-        <h3>Want to go out but have trouble making a decision?</h3>
-      </hgroup>
-      <a href="/howitworks"><button class="btn btn-hero btn-lg" role="button">It's a DONE DEAL</button></a>
-    </div>
-  </div>
+ <div>
+   <video autoplay muted loop id="video">
+     <source src="src/img/bar.mp4" type="video/mp4">
+   </video>
+   <div class="hero video-title">
+     <hgroup>
+       <h1><span class="bold orange">Done</span>Deal</h1>
+       <h3>Want to go out but have trouble making a decision?</h3>
+     </hgroup>
+     <a href="/howitworks"><button class="btn btn-hero btn-lg" role="button">It's a DONE DEAL</button></a>
+   </div>
+ </div>
 
-  <div class="parallax">
-    <div class="row">
-      <div class="container" style="padding: 12% 0%;">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-          <div class="our-services-wrapper mb-60">
-            <div class="services-inner">
-              <div class="our-services-img">
-                <img src="http://getdrawings.com/img/silhouette-beer-10.png" width="65px" alt="">
-  								</div>
-                <div class="our-services-text">
-                  <h4>Drinking Deals</h4>
-                  <p><a class="nav-link" href="/drinks"> Find the best drinks deals in town!</a></p>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-            <div class="our-services-wrapper mb-60">
-              <div class="services-inner">
-                <div class="our-services-img">
-                  <img src="https://ubisafe.org/images/burger-transparent-silhouette-1.png" width="65px" alt="">
-  								</div>
-                  <div class="our-services-text">
-                    <h4>Food Deals</h4>
-                    <p><a class="nav-link" href="/food">Find the best food deals in town!</a></p>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-              <div class="our-services-wrapper mb-60">
-                <div class="services-inner">
-                  <div class="our-services-img">
-                    <img src="https://png.pngtree.com/svg/20151105/about_us_icon_87514.png" width="68px" alt="">
-  								</div>
-                    <div class="our-services-text">
-                      <h4>About us</h4>
-                      <p><a class="nav-link" href="/aboutus"> Find out more about us<a></p>
-  								</div>
-  							</div>
-  						</div>
-  			</div>
-      </div>
-    </div>
-  </div>
+ <div class="parallax">
+   <div class="row">
+     <div class="container" style="padding: 12% 0%;">
+       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+         <div class="our-services-wrapper mb-60">
+           <div class="services-inner">
+             <div class="our-services-img">
+               <img src="
+http://getdrawings.com/img/silhouette-beer-10.png
+" width="65px" alt="">
+                                 </div>
+               <div class="our-services-text">
+                 <h4>Food and Drink Deals</h4>
+                   <p>Find the best deals in town!</p>
+                     <a href="/dealsearch"><button class="btn btn-hero btn-lg" role="button">Deal Search</button></a>
+               </div>
+             </div>
+           </div>
+       </div>
+
+       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+             <div class="our-services-wrapper mb-60">
+               <div class="services-inner">
+                 <div class="our-services-img">
+                   <img src="
+https://png.pngtree.com/svg/20151105/about_us_icon_87514.png
+" width="68px" alt="">
+                                 </div>
+                   <div class="our-services-text">
+                     <h4>Meet the Team</h4>
+                       <p>Find our more about us</p>
+                         <a href="/aboutus"><button class="btn btn-hero btn-lg" role="button">Meet the Team</button></a>
+                                 </div>
+                             </div>
+                         </div>
+             </div>
+     </div>
+   </div>
+ </div>
 
 <footer>
-  <%- include partials/footer.ejs %>
+ <%- include partials/footer.ejs %>
 </footer>
 
 </body>
