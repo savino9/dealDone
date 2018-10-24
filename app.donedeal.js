@@ -17,7 +17,7 @@ app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
 // DATABASE ---------------------------------------------------------
-const sequelize = new Sequelize(process.env.DATABASE_URL {
+const sequelize = new Sequelize(process.env.DATABASE_URL,  {
   host: 'localhost',
   dialect: 'postgres'
 });
