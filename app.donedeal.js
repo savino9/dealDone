@@ -365,6 +365,11 @@ app.get('/contact', (req, res) => {
   res.render('contact')
 })
 
+// TEAM ---------------------------------------------------------------------
+app.get('/team', (req, res) => {
+  res.render('team')
+})
+
 // BUSINESS MODEL --------------------------------------------------------------
 app.get('/businessmodel', (req, res) => {
   const {business} = req.session;

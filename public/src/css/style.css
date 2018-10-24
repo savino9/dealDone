@@ -101,6 +101,8 @@ table table-hover {
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 5%;
+  min-height: 100%;
+  float: left;
 }
 
 /*=======PARALLAX=======*/

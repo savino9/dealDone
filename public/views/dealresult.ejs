@@ -14,10 +14,10 @@
   </header>
 
   <div class="bgdrinks">
+    <% if(offers.length > 0) {%>
     <table class="table table-dark">
       <thead>
         <tr>
-          <!-- <th>#</th> -->
           <th scope="col">Business Name</th>
           <th scope="col">Business Address</th>
           <th scope="col">Offer</th>
@@ -49,6 +49,12 @@
         <% } %>
       </tbody>
     </table>
+    <% } else {%>
+    <div class="texttitle">
+      <h1>Sorry no match found</h1>
+    </div>
+    <% } %>
+
   </div>
 
 <footer>
