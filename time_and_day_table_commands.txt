@@ -1,12 +1,6 @@
 insert into businesses
 
-insert into businesses (id, name, address, email, password) values
-(1, Cafe Mokum A2, Leidseplein 18, cafemokum@gmail.com, cafemokum),
-(2, Cafe De Gieter, Korte Leidsedwarsstraat 179, cafedegieter@gmail.com, cafedegieter),
-(3, Kopstootbar, Marnixstraat 429, kopstootbar@gmail.com, kopstootbar),
-(4, De Zotte, Raamstraat 29, dezotte@gmail.com, dezotte),
-(5, Cafe Bubbels, Lange Leidsedwarsstraat 90-92, cafebubbels@gmail.com, cafebubbels),
-(6, Pianobar Maxim, Leidsekruisstraat 33, pianobarmaxim@gmail.com, pianobarmaxim),
+insert into businesses (id, name, address, email, password) values (1, 'Cafe Mokum A2', 'Leidseplein 18', 'cafemokum@gmail.com', 'cafemokum'),(2, 'Cafe De Gieter', 'Korte Leidsedwarsstraat 179', 'cafedegieter@gmail.com', 'cafedegieter'),(3, 'Kopstootbar', 'Marnixstraat 429', 'kopstootbar@gmail.com', 'kopstootbar'),(4, 'De Zotte', 'Raamstraat 29', 'dezotte@gmail.com', 'dezotte'),(5, 'Cafe Bubbels', 'Lange Leidsedwarsstraat 90-92', 'cafebubbels@gmail.com', 'cafebubbels'),(6, 'Pianobar Maxim', 'Leidsekruisstraat 33', 'pianobarmaxim@gmail.com', 'pianobarmaxim');
 
 Café MokumA2	Leidseplein 18	2 beer for €5	17:00-18:00 every day!
 Café De Gieter	Korte Leidsedwarsstraat 179	1 pitcher of beer €10	19:00-20:00 every day!
